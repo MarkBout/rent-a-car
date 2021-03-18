@@ -24,7 +24,7 @@ if ($connection->ping()){
     echo 'no connection';
 }
 
-echo 'hello world';
+echo 'hallo wereld';
 
 ?>
 </body>
