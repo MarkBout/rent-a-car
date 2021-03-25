@@ -12,9 +12,11 @@
 include_once '../lib/GebruikDB.php';
 //include 'navbar.php';
 $database = new GebruikDB();
+
 $connection = $database->setConn('localhost:3306','root', null,'rent-a-car');
+
 if ($connection->ping()){
-    echo 'connection available'.'<br>';
+    echo 'connection available'.'<br><br>';
     echo '<b>list of tables</b> <br>';
     $result = $connection->query('show tables');
     while ($table = mysqli_fetch_array($result)){
@@ -23,8 +25,7 @@ if ($connection->ping()){
 }else{
     echo 'no connection';
 }
-
-echo 'hallo wereld';
+ echo 'ik werk :)';
 
 ?>
 </body>
