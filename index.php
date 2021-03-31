@@ -11,10 +11,10 @@ include 'navbar.php';
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Rent a car</title>
 </head>
-<body class="primary-colour">
-    <div class="container-fluid h-100 position-absolute">
+<body class="bg-soft-white">
+    <div class="container-fluid position-relative" style=" z-index: -99;">
         <?/*@todo Make this dynamic and shorter*/ ?>
-        <div class="h-100 w-100" style=" z-index: -99;">
+        <div class="h-100 w-100" style=" background-color: #FDF1E7; z-index: -98;">
             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
@@ -60,6 +60,8 @@ include 'navbar.php';
             </div>
         </div>
 
+        <div class="position-absolute top-50 start-50 translate-middle w-75 h-75 primary-colour" style="opacity: 0.9"></div>
     </div>
+
 </body>
 </html>

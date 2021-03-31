@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="lib/bootstrap-5/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/navbar.css">
 </head>
-<nav class="navbar navbar-dark primary-colour navbar-expand-md bg-faded justify-content-center">
+<nav class="navbar navbar-dark primary-colour navbar-expand-md bg-faded justify-content-center fixed-top">
     <div class="navbar-collapse collapse w-25 order-1 order-md-0 dual-collapse2">
         <a class="navbar-brand border-0 " href="#">
             <img src="images/logo.png" height="65" alt="">
