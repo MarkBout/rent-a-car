@@ -17,12 +17,17 @@
 <nav class="navbar navbar-dark primary-colour navbar-expand-md bg-faded justify-content-center fixed-top">
     <div class="navbar-collapse collapse w-25 order-1 order-md-0 dual-collapse2">
         <a class="navbar-brand border-0 " href="#">
-            <img src="images/logo.png" height="65" alt="">
+            <img src="images/logo.png" height="65" alt="LOGO">
         </a>
         <h3 class="h3 text-white"> Rent a car | Autoverhuur </h3>
     </div>
     <div class="navbar-collapse collapse w-50" id="collapsingNavbar3">
         <ul class="nav navbar-nav ml-auto w-75 justify-content-end">
+            <li class="nav-item mr-2">
+                <button type="button" class="w-100 btn btn-primary rounded-pill btn-lg">
+                    <a class="text-white text-decoration-none" href="index.php">Home</a>
+                </button>
+            </li>
             <li class="nav-item">
                 <button type="button" class="w-100 btn btn-primary rounded-pill btn-lg">
                     <a class="text-white text-decoration-none" href="contact.php">Contact</a>
@@ -30,7 +35,7 @@
             </li>
             <li class="ms-2 me-2 nav-item">
                 <button type="button" class="w-100 btn btn-primary rounded-pill btn-lg">
-                    <a class="text-white text-decoration-none" href="#">Onze auto's</a>
+                    <a class="text-white text-decoration-none" href="autoOverzicht.php">Onze auto's</a>
                 </button>
             </li>
             <?php if(isset($_SESSION['gebruiker'])): ?>
