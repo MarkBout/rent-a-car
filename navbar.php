@@ -1,5 +1,8 @@
 <head>
-    <?php include 'modals/login.php'?>
+    <?php
+    include 'modals/login.php';
+    include 'modals/register.php';
+    ?>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -58,7 +61,7 @@
             <?php else: ?>
                 <li class="nav-item">
                     <button type="button" class="btn btn-primary rounded-pill btn-lg"><a
-                                class="text-white text-decoration-none" href="#">Registreren</a></button>
+                                class="text-white text-decoration-none" data-bs-toggle="modal" data-bs-target="#registerModal">Registreren</a></button>
                 </li>
                 <li class="nav-item">
                     <button type="button" class="btn btn-primary ms-2 rounded-pill btn-lg"><a

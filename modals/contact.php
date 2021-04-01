@@ -14,7 +14,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="Email1" class="form-label">Email adres</label>
-                        <input type="email" class="form-control" id="Email1" name="contact[email]" aria-describedby="emailHelp">
+                        <input type="text" class="form-control" id="Email1" name="contact[email]" aria-describedby="emailHelp">
                         <div id="emailHelp" class="form-text">We zullen uw gegevens nooit met iemand delen</div>
                     </div>
                     <div class="mb-3">
