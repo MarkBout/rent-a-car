@@ -1,4 +1,5 @@
 <head>
+    <?php include 'modals/login.php'?>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -61,7 +62,7 @@
                 </li>
                 <li class="nav-item">
                     <button type="button" class="btn btn-primary ms-2 rounded-pill btn-lg"><a
-                                class="text-white text-decoration-none" href="#">inloggen</a></button>
+                                class="text-white text-decoration-none" data-bs-toggle="modal" data-bs-target="#loginModal">inloggen</a></button>
                 </li>
             <?php endif;?>
         </ul>
