@@ -5,10 +5,6 @@ include 'navbar.php';
 <!doctype html>
 <html lang="en">
 <head>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Rent a car</title>
 </head>
 <body class="bg-soft-white">
@@ -60,8 +56,12 @@ include 'navbar.php';
             </div>
         </div>
 
-        <div class="position-absolute top-50 start-50 translate-middle w-75 h-75 primary-colour" style="opacity: 0.9"></div>
+        <div class="container position-absolute primary-colour" style="top: 15%; left: 10%; right: 10%; opacity: 0.9">
+            <h1 class="h1 text-center text-white mb-3">Welkom bij Rent a Car</h1>
+            <div class="row w-50 position-relative" style="left: 25%">
+                <p class="text-white text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sem lorem, pellentesque eu efficitur et, lobortis nec quam. Proin egestas, augue quis convallis tristique, elit massa ullamcorper ante, nec tincidunt magna felis vitae dolor. Suspendisse venenatis eros quis elit gravida dictum. Phasellus pellentesque viverra massa, non fermentum leo sagittis id. Sed id sodales nulla, id pulvinar ligula.</p>
+            </div>
+        </div>
     </div>
-
 </body>
 </html>
