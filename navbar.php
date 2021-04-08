@@ -1,8 +1,9 @@
+<?php
+session_start();
+include 'modals/login.php';
+include 'modals/register.php';
+?>
 <head>
-    <?php
-    include 'modals/login.php';
-    include 'modals/register.php';
-    ?>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

@@ -1,6 +1,10 @@
 <?php
 include_once 'lib/GebruikDB.php';
 include 'navbar.php';
+//check session related stuff
+if (isset($_SESSION['register']['message'])){
+    echo '<div id="registermessage" class="'.$_SESSION['register']['message']['class'].'" role="alert">'.$_SESSION['register']['message']['content'].'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+}
 ?>
 <!doctype html>
 <html lang="en">
