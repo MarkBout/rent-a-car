@@ -20,7 +20,7 @@
 </head>
 <nav class="navbar navbar-dark primary-colour navbar-expand-md bg-faded justify-content-center fixed-top">
     <div class="navbar-collapse collapse w-25 order-1 order-md-0 dual-collapse2">
-        <a class="navbar-brand border-0 " href="#">
+        <a class="navbar-brand border-0 " href="index.php">
             <img src="images/logo.png" height="65" alt="LOGO">
         </a>
         <h3 class="h3 text-white"> Rent a car | Autoverhuur </h3>

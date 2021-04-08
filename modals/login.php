@@ -22,7 +22,7 @@ include 'modal.html';
                     </div>
                     <button class="btn btn-lg btn-primary rounded-pill btn-block" type="submit">Inloggen</button>
                 </form>
-                <div class="signup-section">Nog geen account? <a href="register.php" class="text-info">registreer</a></div>
+                <div class="signup-section">Nog geen account? <a href="" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal" data-bs-target="#registerModal" class="text-info">registreer</a></div>
                 <p class="mt-5 mb-3 text-muted">&copy; 2021 Mark Bout</p>
             </div>
         </div>

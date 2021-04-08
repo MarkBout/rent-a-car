@@ -18,4 +18,9 @@ class GebruikDB {
             return "Error: %s\n".$this->conn->error;
         }
     }
+
+    public function saveObject(mysqli $connection, array $object, $table){
+        $coloms = array_keys($object);
+        $values = array_values($object);
+    }
 }
