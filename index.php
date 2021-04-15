@@ -2,9 +2,6 @@
 
 include 'navbar.php';
 //check session related stuff
-if (isset($_SESSION['message'])){
-    echo '<div id="registermessage" class="'.$_SESSION['message']['class'].'" role="alert">'.$_SESSION['message']['content'].'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
-}
 ?>
 <!doctype html>
 <html lang="en">
@@ -61,6 +58,11 @@ if (isset($_SESSION['message'])){
         </div>
 
         <div class="container position-absolute primary-colour pb-3" style="top: 15%; left: 10%; right: 10%; background-color: rgba(84, 141, 212,0.9);">
+            <?php
+            if (isset($_SESSION['message'])){
+                echo '<div id="registermessage" class="'.$_SESSION['message']['class'].'" role="alert"><button type="button" class="btn-close text-end" data-bs-dismiss="alert" aria-label="Close"></button>'.$_SESSION['message']['content'].'</div>';
+            }
+            ?>
             <h1 class="h1 text-center text-white mb-3">Welkom bij Rent a Car</h1>
             <div class="row w-50 position-relative" style="left: 25%">
                 <p class="text-white " style="text-align: justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sem lorem, pellentesque eu efficitur et, lobortis nec quam. Proin egestas, augue quis convallis tristique, elit massa ullamcorper ante, nec tincidunt magna felis vitae dolor. Suspendisse venenatis eros quis elit gravida dictum. Phasellus pellentesque viverra massa, non fermentum leo sagittis id. Sed id sodales nulla, id pulvinar ligula.</p>
@@ -71,5 +73,11 @@ if (isset($_SESSION['message'])){
             </div>
         </div>
     </div>
+<script>
+    function hideMessage() {
+        document.getElementById("registermessage").style.display = "none";
+    };
+    setTimeout(hideMessage, 10000);
+</script>
 </body>
 </html>

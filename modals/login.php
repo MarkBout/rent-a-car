@@ -9,7 +9,7 @@ include 'modal.html';
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="form-signin" method="post" action="../lib/Account.php">
+                <form class="form-signin" method="post" action="lib/Account.php">
                     <h1 class="h3 mb-3 font-weight-normal">Vul uw inloggegevens in</h1>
                     <label for="inputEmail" class="sr-only">Email adres</label>
                     <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" name="login[gebruikersnaam]" autofocus="">

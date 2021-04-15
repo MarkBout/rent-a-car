@@ -3,7 +3,6 @@ session_start();
 include_once 'lib/GebruikDB.php';
 include 'modals/login.php';
 include 'modals/register.php';
-
 ?>
 <head>
     <!-- Required meta tags -->
@@ -30,6 +29,27 @@ include 'modals/register.php';
     </div>
     <div class="navbar-collapse collapse w-50" id="collapsingNavbar3">
         <ul class="nav navbar-nav ml-auto w-75 justify-content-end">
+            <?php if(isset($_SESSION['gebruiker'])): ?>
+                <li class="nav-item dropdown rounded-pill mr-2" style="background-color: #1361C2;">
+                    <a class="nav-link dropdown-toggle text-white text-center" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <?php echo $_SESSION['gebruiker'][1].' '.$_SESSION['gebruiker'][2].' '.$_SESSION['gebruiker'][3]; ?>
+                    </a>
+                    <ul class="dropdown-menu" style="background-color: #1361C2;" aria-labelledby="navbarDarkDropdownMenuLink">
+                        <li><a class="dropdown-item text-white" href="#">Mijn Profiel</a></li>
+                        <li><a class="dropdown-item text-white" href="#">Winkelmand</a></li>
+                        <li><a class="dropdown-item text-white" href="logout.php">Uitloggen</a></li>
+                    </ul>
+                </li>
+            <?php else: ?>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-primary rounded-pill btn-lg"><a
+                                class="text-white text-decoration-none" data-bs-toggle="modal" data-bs-target="#registerModal">Registreren</a></button>
+                </li>
+                <li class="nav-item mr-2">
+                    <button type="button" class="btn btn-primary ms-2 rounded-pill btn-lg"><a
+                                class="text-white text-decoration-none" data-bs-toggle="modal" data-bs-target="#loginModal">inloggen</a></button>
+                </li>
+            <?php endif;?>
             <li class="nav-item mr-2">
                 <button type="button" class="w-100 btn btn-primary rounded-pill btn-lg">
                     <a class="text-white text-decoration-none" href="index.php">Home</a>
@@ -45,32 +65,6 @@ include 'modals/register.php';
                     <a class="text-white text-decoration-none" href="autoOverzicht.php">Onze auto's</a>
                 </button>
             </li>
-            <?php if(isset($_SESSION['gebruiker'])): ?>
-                <li>
-                    <div class="dropdown">
-                        <a href="#" id="imageDropdown" data-toggle="dropdown">
-                            <img src="https://picsum.photos/50">
-                        </a>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="imageDropdown">
-                            <li role="presentation"><a class="text-decoration-none" role="menuitem" tabindex="-1" href="#">Menu
-                                    item 1</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Menu item 2</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Menu item 3</a></li>
-                            <li role="presentation" class="divider"></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Menu item 4</a></li>
-                        </ul>
-                    </div>
-                </li>
-            <?php else: ?>
-                <li class="nav-item">
-                    <button type="button" class="btn btn-primary rounded-pill btn-lg"><a
-                                class="text-white text-decoration-none" data-bs-toggle="modal" data-bs-target="#registerModal">Registreren</a></button>
-                </li>
-                <li class="nav-item">
-                    <button type="button" class="btn btn-primary ms-2 rounded-pill btn-lg"><a
-                                class="text-white text-decoration-none" data-bs-toggle="modal" data-bs-target="#loginModal">inloggen</a></button>
-                </li>
-            <?php endif;?>
         </ul>
     </div>
 </nav>
