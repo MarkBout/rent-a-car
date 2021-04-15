@@ -1,7 +1,9 @@
 <?php
 session_start();
+include_once 'lib/GebruikDB.php';
 include 'modals/login.php';
 include 'modals/register.php';
+
 ?>
 <head>
     <!-- Required meta tags -->

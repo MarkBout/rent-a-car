@@ -14,7 +14,7 @@ include 'modal.html';
                     <label for="inputEmail" class="sr-only">Email adres</label>
                     <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" name="login[gebruikersnaam]" autofocus="">
                     <label for="inputPassword" class="sr-only">Wachtwoord</label>
-                    <input type="password" id="inputPassword" class="form-control" name="login" placeholder="Password" required="">
+                    <input type="password" id="inputPassword" class="form-control" name="login[wachtwoord]" placeholder="Password" required="">
                     <div class="checkbox mb-3">
                         <label>
                             <input type="checkbox" value="remember-me"> Remember me
