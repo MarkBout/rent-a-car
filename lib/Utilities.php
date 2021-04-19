@@ -12,4 +12,18 @@ class Utilities
         echo "<script> location.href='$url'; </script>";
         exit;
     }
+
+    function getRole($role){
+        switch ($role){
+            case 0:
+                $role = 'Klant';
+                break;
+            case 1:
+                $role = 'Medewerker';
+                break;
+            default: $role = 'role could not be found Invalid integer';
+        }
+        return $role;
+    }
+
 }

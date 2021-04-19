@@ -78,3 +78,9 @@ if (isset($_POST['login']) && !empty($_POST['login'])){
         }
     }
 }
+
+//handle profile changes
+if (isset($_POST['profile']) && !empty($_POST['profile'])){
+    $profile = $_POST['profile'];
+    unset($_POST['profile']);
+}
