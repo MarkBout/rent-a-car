@@ -7,4 +7,9 @@ class Utilities
         $template = file_get_contents($templatePath);
         return preg_replace_callback('/{{(.+?)}}/', function($matches) use ($data) {return $data[$matches[1]];}, $template);
     }
+
+    function redirect($url) {
+        echo "<script> location.href='$url'; </script>";
+        exit;
+    }
 }

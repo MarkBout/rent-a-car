@@ -57,7 +57,7 @@ if (isset($_POST['login']) && !empty($_POST['login'])){
                 $query = "SELECT * FROM gebruiker WHERE idgebruikers = ".$id;
                 $result = $connection->query($query);
                 $_SESSION['gebruiker'] = [];
-                while($row = $result->fetch_row()) {
+                while($row = $result->fetch_assoc()) {
                     $_SESSION['gebruiker'] = $row;
                 }
                 header('location: ../index.php');

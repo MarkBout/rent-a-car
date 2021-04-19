@@ -32,10 +32,10 @@ include 'modals/register.php';
             <?php if(isset($_SESSION['gebruiker'])): ?>
                 <li class="nav-item dropdown rounded-pill mr-2" style="background-color: #1361C2;">
                     <a class="nav-link dropdown-toggle text-white text-center" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <?php echo $_SESSION['gebruiker'][1].' '.$_SESSION['gebruiker'][2].' '.$_SESSION['gebruiker'][3]; ?>
+                        <?php echo $_SESSION['gebruiker']['voornaam'].' '.$_SESSION['gebruiker']['tussenvoegsel'].' '.$_SESSION['gebruiker']['achternaam']; ?>
                     </a>
                     <ul class="dropdown-menu" style="background-color: #1361C2;" aria-labelledby="navbarDarkDropdownMenuLink">
-                        <li><a class="dropdown-item text-white" href="#">Mijn Profiel</a></li>
+                        <li><a class="dropdown-item text-white" href="Profiel.php">Mijn Profiel</a></li>
                         <li><a class="dropdown-item text-white" href="#">Winkelmand</a></li>
                         <li><a class="dropdown-item text-white" href="logout.php">Uitloggen</a></li>
                     </ul>
