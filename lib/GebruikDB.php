@@ -28,7 +28,7 @@ class GebruikDB {
     public function makeObject(mysqli $connection, array $object, $table){
         $coloms = implode(", ", array_keys($object));
         $values = implode("','", array_values($object));
-        $query = "INSERT INTO $table ($coloms) VALUES ('$values')";
+        $query = "REPLACE INTO $table ($coloms) VALUES ('$values')";
         if ($stmt = $connection->prepare($query))   {
             $stmt->execute();
             if (!$stmt->affected_rows > 0) {

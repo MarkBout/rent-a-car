@@ -5,7 +5,7 @@ $utilities = new Utilities();
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Auto overzicht</title>
+    <title>Auto overzicht | Rent a Car</title>
 </head>
 <body class="bg-soft-white">
     <div class="container-fluid">
@@ -14,8 +14,8 @@ $utilities = new Utilities();
              <div class="col-12" style="max-width: 100%">
                 <div class="row">
                     <?php
-                        if (isset($testData)) {
-                            foreach ($testData as $car) {
+                        if (isset($carlist)) {
+                            foreach ($carlist as $car) {
                                 echo '<div class="col-6">';
                                 echo $utilities->generateTemplate('cards/auto.php', $car);
                                 echo '</div>';

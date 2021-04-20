@@ -6,7 +6,7 @@ include 'navbar.php';
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Rent a car</title>
+    <title>Home | Rent a car</title>
 </head>
 <body class="bg-soft-white">
     <div class="container-fluid position-relative">
@@ -62,6 +62,7 @@ include 'navbar.php';
             if (isset($_SESSION['message'])){
                 echo '<div id="registermessage" class="'.$_SESSION['message']['class'].'" role="alert"><button type="button" class="btn-close text-end" data-bs-dismiss="alert" aria-label="Close"></button>'.$_SESSION['message']['content'].'</div>';
             }
+
             ?>
             <h1 class="h1 text-center text-white mb-3">Welkom bij Rent a Car</h1>
             <div class="row w-50 position-relative" style="left: 25%">
@@ -77,7 +78,7 @@ include 'navbar.php';
     function hideMessage() {
         document.getElementById("registermessage").style.display = "none";
     };
-    setTimeout(hideMessage, 10000);
+    setTimeout(hideMessage, 1000);
 </script>
 </body>
 </html>

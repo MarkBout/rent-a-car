@@ -1,6 +1,8 @@
 <?php
 session_start();
 include 'GebruikDB.php';
+include 'Utilities.php';
+$utilities = new Utilities();
 $database = new GebruikDB();
 //Setup DB connection
 $connection = $database->setConn('localhost', 'root',null,'rent-a-car');
@@ -21,21 +23,21 @@ if (isset($_POST['register']) && !empty($_POST['register'])){
             $_SESSION['message']['class'] = 'alert alert-warning';
             $_SESSION['message']['content'] = 'gebruikersnaam '. $register['gebruikersnaam'] . ' is al in gebruik';
             $stmt->close();
-            header("Location: ../index.php");
+            $utilities->redirect('../index.php');
         }else{
             //insert new account
             $register['wachtwoord'] = password_hash($register['wachtwoord'],PASSWORD_DEFAULT);
             $database->makeObject($connection,$register,'gebruiker');
             $_SESSION['message']['class'] = 'alert alert-success';
             $_SESSION['message']['content'] = 'Account aangemaakt. U kunt nu inloggen';
-            header("Location: ../index.php");
+            $utilities->redirect('../index.php');
             return $_SESSION['message'];
         }
 
     }else{
         $_SESSION['message']['class'] = 'alert alert-danger';
         $_SESSION['message']['content'] = 'kon geen account aanmaken';
-        header("Location: ../index.php");
+        $utilities->redirect('../index.php');
         return $_SESSION['message'];
     }
 }
@@ -60,7 +62,7 @@ if (isset($_POST['login']) && !empty($_POST['login'])){
                 while($row = $result->fetch_assoc()) {
                     $_SESSION['gebruiker'] = $row;
                 }
-                header('location: ../index.php');
+                $utilities->redirect('../index.php');
                 return $_SESSION['gebruiker'];
             }else{
                 $_SESSION['message']['class'] = 'alert alert-warning';
@@ -73,7 +75,7 @@ if (isset($_POST['login']) && !empty($_POST['login'])){
             $stmt->close();
             $_SESSION['message']['class'] = 'alert alert-warning';
             $_SESSION['message']['content'] = 'onjuiste gebruikersnaam of wachtwoord';
-            header('location: ../index.php');
+            $utilities->redirect('../index.php');
             return $_SESSION['message'];
         }
     }
@@ -83,4 +85,15 @@ if (isset($_POST['login']) && !empty($_POST['login'])){
 if (isset($_POST['profile']) && !empty($_POST['profile'])){
     $profile = $_POST['profile'];
     unset($_POST['profile']);
+    if (empty($profile['tussenvoegsel']) || $profile['tussenvoegsel'] == '') unset($profile['tussenvoegsel']);
+    if (!empty($profile['newpass']) || !$profile['newpass'] == ''){
+        $profile['wachtwoord'] = password_hash($profile['newpass'],PASSWORD_DEFAULT);
+        unset($profile['newpass']);
+    }else{
+        unset($profile['newpass']);
+    }
+    $database->makeObject($connection,$profile,'gebruiker');
+    $_SESSION['message']['class'] = 'alert alert-success';
+    $_SESSION['message']['content'] = 'Gegevens gewijzigd';
+    $utilities->redirect($_SERVER['HTTP_REFERER']);
 }
