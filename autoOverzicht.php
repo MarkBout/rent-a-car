@@ -1,6 +1,6 @@
 <?php include 'navbar.php';
 include_once 'lib/Utilities.php';
-$utilities = new Utilities();
+$carlist = $database->getObject($connection,'auto',array('*'), "status='available'");
 ?>
 <!doctype html>
 <html lang="en">
@@ -14,7 +14,7 @@ $utilities = new Utilities();
              <div class="col-12" style="max-width: 100%">
                 <div class="row">
                     <?php
-                        if (isset($carlist)) {
+                        if (isset($carlist) && !empty($carlist)) {
                             foreach ($carlist as $car) {
                                 echo '<div class="col-6">';
                                 echo $utilities->generateTemplate('cards/auto.php', $car);

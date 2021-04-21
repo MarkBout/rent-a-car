@@ -63,9 +63,9 @@ $gebruiker = $_SESSION['gebruiker'];
                                                 <div class="col-md-6 mb-1">
                                                     <input id="newpass2" type="password" class="form-control">
                                                     <button type="button" class="btn btn-sm btn-success mt-1" onclick="checkPass()">Check wachtwoord</button>
+                                                    <button type="submit" class="btn btn-primary rounded-pill" style="">Opslaan</button>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-primary rounded-pill" style="  position: fixed; top: 53%; left: 50%;">Opslaan</button>
                                         </div>
 
                                         <div class="row mt-1">

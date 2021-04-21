@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once 'lib/GebruikDB.php';
-include 'lib/Utilities.php';
+include_once 'lib/Utilities.php';
 include 'modals/login.php';
 include 'modals/register.php';
 $utilities = new Utilities();
@@ -16,6 +16,8 @@ $connection = $database->setConn('localhost', 'root',null,'rent-a-car');
             src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
             crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -23,6 +25,11 @@ $connection = $database->setConn('localhost', 'root',null,'rent-a-car');
 
     <link rel="stylesheet" href="lib/bootstrap-5/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/navbar.css">
+    <style>
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Lobster', cursive;
+        }
+    </style>
 </head>
 <header>
     <nav class="navbar navbar-dark primary-colour navbar-expand-md bg-faded justify-content-center fixed-top">
@@ -30,7 +37,7 @@ $connection = $database->setConn('localhost', 'root',null,'rent-a-car');
             <a class="navbar-brand border-0 " href="index.php">
                 <img src="images/logo.png" height="65" alt="LOGO">
             </a>
-            <h3 class="h3 text-white"> Rent a car | Autoverhuur </h3>
+            <h3 class="text-white"> Rent a car | Autoverhuur </h3>
         </div>
         <div class="navbar-collapse collapse w-50" id="collapsingNavbar3">
             <ul class="nav navbar-nav ml-auto w-75 justify-content-end">
@@ -41,6 +48,9 @@ $connection = $database->setConn('localhost', 'root',null,'rent-a-car');
                         </a>
                         <ul class="dropdown-menu" style="background-color: #1361C2;" aria-labelledby="navbarDarkDropdownMenuLink">
                             <li><a class="dropdown-item text-white" href="Profiel.php">Mijn Profiel</a></li>
+                            <?php if(isset($_SESSION['gebruiker']) && $_SESSION['gebruiker']['rol'] == 1): ?>
+                            <li><a class="dropdown-item text-white" href="medewerkers.php">Medewerkers pagina</a></li>
+                            <?php endif;?>
                             <li><a class="dropdown-item text-white" href="#">Winkelmand</a></li>
                             <li><a class="dropdown-item text-white" href="logout.php">Uitloggen</a></li>
                         </ul>

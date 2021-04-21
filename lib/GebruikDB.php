@@ -9,7 +9,7 @@ class GebruikDB {
 
         $this->conn = mysqli_connect($host, $user, $password, $database);
         if ($this->conn -> connect_errno) {
-            echo "Failed to connect to MySQL: " . $this->conn -> connect_error;
+            echo "Failed to connect to MySQL: " . $this->conn->connect_error;
             exit();
         }
         //ping naar de server sturen om te kijken of er connectie is

@@ -64,7 +64,7 @@ include 'navbar.php';
             }
 
             ?>
-            <h1 class="h1 text-center text-white mb-3">Welkom bij Rent a Car</h1>
+            <h1 class="text-center text-white mb-3">Welkom bij Rent a Car</h1>
             <div class="row w-50 position-relative" style="left: 25%">
                 <p class="text-white " style="text-align: justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sem lorem, pellentesque eu efficitur et, lobortis nec quam. Proin egestas, augue quis convallis tristique, elit massa ullamcorper ante, nec tincidunt magna felis vitae dolor. Suspendisse venenatis eros quis elit gravida dictum. Phasellus pellentesque viverra massa, non fermentum leo sagittis id. Sed id sodales nulla, id pulvinar ligula.</p>
                 <div class="btn-group" role="group" aria-label="index buttons">
