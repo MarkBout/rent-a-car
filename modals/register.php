@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="lib/Account.php" method="post" autocomplete="off">
+                <form action="lib/HandlePOST.php" method="post" autocomplete="off">
                     <label for="voornaam">Voornaam</label>
                     <input type="text" class="form-control" name="register[voornaam]" id="voornaam" required>
                     <label for="tussenvoegsel">Tussenvoegsel</label>

@@ -7,11 +7,12 @@ if (isset($_GET['id'])){
     $auto = $database->getObject($connection,'auto',array('*'),"idauto=".$_GET['id']);
 }
 $prijzen = $database->getObject($connection,'prijs',array('*'));
+
 ?>
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Auto toevoegen | Rent a Car</title>
+    <title>Auto Beheer | Rent a Car</title>
 </head>
 <body class="bg-soft-white">
     <div class="container-fluid">
@@ -24,7 +25,7 @@ $prijzen = $database->getObject($connection,'prijs',array('*'));
                 endif;?>
                 <hr class="text-white">
             </div>
-                <form action="autotoevoegen.php" method="post" enctype="multipart/form-data" class="row">
+                <form action="lib/HandlePOST.php" method="post" enctype="multipart/form-data" class="row">
                     <img class="col-4 ms-2" src="#" id="output" alt=""/>
                     <div class="ms-5 col-3">
                         <label for="naam" class="form-label text-white">Naam van de auto</label>
@@ -40,22 +41,29 @@ $prijzen = $database->getObject($connection,'prijs',array('*'));
                             <option value="rented">Verhuurd</option>
                         </select>
                         <label for="afbeelding" class="form-label text-white">Afbeelding van de auto</label>
-                        <input type="file" class="form-control" accept="image/*" onchange="loadFile(event)">
+                        <input type="file" name="afbeelding" class="form-control" accept="image/*"  required onchange="loadFile(event)">
                     </div>
                     <div class="col-4">
                         <div class="row">
                             <div class="col-10">
-                                <label for="prijs" class="form-label text-white">Prijs van de auto</label>
-                                <select name="auto[prijs_idprijs]" id="prijs" class="form-select form-select-sm">
-                                    <?php if (!empty($prijzen)){
-                                        foreach ($prijzen as $prijs){
-                                            echo "<option value='".$prijs['idprijs']."'>".$prijs['merk']." ".$prijs['type']." €".$prijs['dagprijs']."</option>";
-                                        }
-                                    }?>
+                                <label for="prijs" class="form-label text-white">Merk, type & dagprijs auto</label>
+                                <select name="auto[idprijs]" id="prijs" class="form-select form-select-sm" required>
+                                    <option selected value="" disabled>kies een prijs</option>
+                                    <?php
+                                    foreach($prijzen as $prijs):
+                                        echo '<option value="'.$prijs['idprijs'].'">'.$prijs['merk'].' '.$prijs['type'].' €'.$prijs['dagprijs'].'</option>'; //close your tags!!
+                                    endforeach;
+                                    ?>
                                 </select>
                             </div>
                             <div class="col-2">
                                 <button type="button" class="btn btn-primary rounded-pill" onclick="nieuwePrijs()">Nieuwe prijs</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-10">
+                                <label for="beschrijving" class="form-label text-white">Beschrijving</label>
+                                <textarea class="form-control" id="beschrijving" name="auto[beschrijving]"></textarea>
                             </div>
                         </div>
                         <div id="newprice" class="row d-none">
@@ -80,6 +88,7 @@ $prijzen = $database->getObject($connection,'prijs',array('*'));
                             </div>
                         </div>
                     </div>
+                    <button type="submit" class="btn ms-auto me-2 col-3 btn-primary rounded-pill">Opslaan</button>
                 </form>
         </div>
     </div>

@@ -4,6 +4,7 @@ if (!isset($_SESSION['gebruiker']) || $_SESSION['gebruiker']['rol'] != 1){
     $utilities->redirect('index.php');
 }
 $carlist = $database->getObject($connection,'auto',array('*'));
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -23,7 +24,8 @@ $carlist = $database->getObject($connection,'auto',array('*'));
                     </div>
                 </div>
                 <hr class="bg-white">
-                <?/**Todo get rented cars from DB and display them**/?>
+                <?php/**Todo get rented cars from DB and display them**/?>
+
             </div>
             <div class="ms-2 col-5 primary-colour" style="top: 15%; left: 10%; right: 10%; opacity: 0.9;">
                 <div class="row">
@@ -31,7 +33,7 @@ $carlist = $database->getObject($connection,'auto',array('*'));
                         <h1 class="text-center text-white">Autobeheer</h1>
                     </div>
                     <div class="col-3 mt-2">
-                        <a type="button" href="autotoevoegen.php" class="btn btn-primary  rounded-pill">Auto toevoegen</a>
+                        <a type="button" href="autoBeheer.php" class="btn btn-primary  rounded-pill">Auto toevoegen</a>
                     </div>
                 </div>
                 <hr class="bg-white">
@@ -39,6 +41,9 @@ $carlist = $database->getObject($connection,'auto',array('*'));
                     <?php
                     if (isset($carlist) && !empty($carlist)) {
                         foreach ($carlist as $car) {
+                           $temp = $database->getObject($connection,'prijs',array('type','dagprijs'),'idprijs='.(int)$car['idprijs']);
+                            $car['type'] = $temp[0]['type'];
+                            $car['dagprijs'] = $temp[0]['dagprijs'];
                             echo $utilities->generateTemplate('cards/auto.php', $car);
                         }
                     }

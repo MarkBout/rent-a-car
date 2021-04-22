@@ -12,10 +12,11 @@
                 <p class="card-text">{{beschrijving}}</p>
                 <p class="card-text"><small class="text-muted">Type {{type}}<br>Kenteken {{kenteken}}</small></p>
                 <div class="row">
-                    <p class="card-text w-50">Dagprijs: &#8364;{{dagprijs}}</p>
-                    <a type="button" href="#" class="btn btn-primary btn-sm w-50 rounded-pill text-white text-center">Bekijk auto</a>
+                    <p class="card-text w-50">Dagprijs: &#8364;{{dagprijs}}</p><br>
+                    <?//todo: Find a way to make this work or make seperate card for employees?>
+                    <a class="btn btn-primary w-50 text-white rounded-pill" href="autoBeheer.php?id={{idauto}}">Bewerk auto</a>
+                    <a class="btn btn-primary w-50 text-white rounded-pill" href="autoDetail.php?id={{idauto}}">Bekijk auto</a>
                 </div>
-
             </div>
         </div>
     </div>

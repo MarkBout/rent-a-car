@@ -38,22 +38,29 @@ class GebruikDB {
             exit($connection->error);
         }
     }
-    public function getObject(mysqli $connection, $table, array $fields, $param = null){
+
+    public function getObject(mysqli $connection, $table, array $fields, $param = null)
+    {
         $object = [];
-        $fields = implode(", ",array_values($fields));
-        if (isset($params)){
+        //pak de velden die ingevoerd zijn in de array
+        $fields = implode(", ", array_values($fields));
+        if (isset($params)) {
             $query = "SELECT $fields FROM $table WHERE $param";
-        }else{
+        } else {
             $query = "SELECT $fields FROM $table";
         }
 
         $result = $connection->query($query);
-        if (mysqli_num_rows($result) == 0){
+        if (mysqli_num_rows($result) == 0) {
             return $connection->error;
-        }else{
-            while ($row = $result->fetch_assoc()) $object = $row;
-            return $object;
+        } else {
+            $index = 0;
+            while ($row = mysqli_fetch_assoc($result)) {
+                $object[$index] = $row;
+                $index++;
+            }
         }
+        return $object;
     }
 
     /**

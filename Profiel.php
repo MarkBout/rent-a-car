@@ -17,7 +17,7 @@ $gebruiker = $_SESSION['gebruiker'];
         }
         ?>
 
-        <form method="post" action="lib/Account.php">
+        <form method="post" action="lib/HandlePOST.php">
             <input type="hidden" name="profile[idgebruikers]" value="<?php echo $gebruiker['idgebruikers'] ?>">
             <div class="row">
                 <div class="col-md-12">

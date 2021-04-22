@@ -67,7 +67,7 @@ if (isset($_POST['login']) && !empty($_POST['login'])){
             }else{
                 $_SESSION['message']['class'] = 'alert alert-warning';
                 $_SESSION['message']['content'] = 'onjuist wachtwoord';
-                header('location: ../index.php');
+                $utilities->redirect('../index.php');
                 return $_SESSION['message'];
             }
         }
@@ -96,4 +96,24 @@ if (isset($_POST['profile']) && !empty($_POST['profile'])){
     $_SESSION['message']['class'] = 'alert alert-success';
     $_SESSION['message']['content'] = 'Gegevens gewijzigd';
     $utilities->redirect($_SERVER['HTTP_REFERER']);
+}
+
+//Nieuwe auto toevoegen
+if (isset($_POST['auto']) && !empty($_POST['auto'])) {
+    //todo fix
+    if (isset($auto) && !empty($auto)) {
+        $car = $auto;
+        unset($_POST['auto']);
+    } else {
+        $car = $_POST['auto'];
+        unset($_POST['auto']);
+        $car['idprijs'] = (int)$car['idprijs'];
+        $afbeelding = $_FILES['afbeelding'];
+        $target = '../images/carImages/' . time() . $afbeelding['name'];
+        move_uploaded_file($afbeelding['tmp_name'], $target);
+        $car['afbeelding'] = substr($target, 3);
+    }
+    $database->makeObject($connection,$car,'auto');
+    $utilities->redirect('../medewerkers.php');
+
 }
