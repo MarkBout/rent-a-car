@@ -14,8 +14,8 @@
                 <div class="row">
                     <p class="card-text w-50">Dagprijs: &#8364;{{dagprijs}}</p><br>
                     <?//todo: Find a way to make this work or make seperate card for employees?>
-                    <a class="btn btn-primary w-50 text-white rounded-pill" href="autoBeheer.php?id={{idauto}}">Bewerk auto</a>
-                    <a class="btn btn-primary w-50 text-white rounded-pill" href="autoDetail.php?id={{idauto}}">Bekijk auto</a>
+                    <a class="btn btn-primary w-50 text-white rounded-pill" href="autoBeheer.php?id={{idauto}}">Bewerken</a>
+                    <a class="btn btn-primary w-50 text-white rounded-pill" href="autoDetail.php?id={{idauto}}">Bekijken</a>
                 </div>
             </div>
         </div>

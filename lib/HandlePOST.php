@@ -101,19 +101,25 @@ if (isset($_POST['profile']) && !empty($_POST['profile'])){
 //Nieuwe auto toevoegen
 if (isset($_POST['auto']) && !empty($_POST['auto'])) {
     //todo fix
-    if (isset($auto) && !empty($auto)) {
-        $car = $auto;
-        unset($_POST['auto']);
-    } else {
-        $car = $_POST['auto'];
-        unset($_POST['auto']);
-        $car['idprijs'] = (int)$car['idprijs'];
-        $afbeelding = $_FILES['afbeelding'];
+    $car = $_POST['auto'];
+    unset($_POST['auto']);
+    if (isset($car['idauto'])) $car['idauto'] = (int) $car['idauto'];
+    $car['idprijs'] = (int)$car['idprijs'];
+    //kijken of er een afbeelding is geupload enzo ja maak hem klaar voor de DB en opslag
+    $afbeelding = $_FILES['afbeelding'];
+    if (!empty($afbeelding['name']) && $afbeelding['name'] != ''){
         $target = '../images/carImages/' . time() . $afbeelding['name'];
         move_uploaded_file($afbeelding['tmp_name'], $target);
         $car['afbeelding'] = substr($target, 3);
+    }else{
+        unset($car['afbeelding'], $afbeelding);
     }
-    $database->makeObject($connection,$car,'auto');
+    //update or make car
+    if (isset($car['idauto'])){
+        $database->updateObject($connection,$car,'auto');
+    }else{
+        $database->makeObject($connection,$car,'auto');
+    }
     $utilities->redirect('../medewerkers.php');
 
 }

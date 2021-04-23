@@ -16,8 +16,8 @@ $carlist = $database->getObject($connection,'auto',array('*'));
         <div class="row position-absolute" style="top: 15%; left: 10%; right: 10%;">
             <div class="me-2 col-5 primary-colour" style="top: 15%; left: 10%; right: 10%; opacity: 0.9">
                 <div class="row">
-                    <div class="col-9">
-                        <h3 class="text-center text-white">Overzicht verhuurde auto's</h3>
+                    <div class="col-8">
+                        <h1 class="text-center text-white">Overzicht verhuurde auto's</h1>
                     </div>
                     <div class="col-3 mt-2">
                         <button type="button" class="btn btn-primary btn-lg rounded-pill">Printen</button>
@@ -29,7 +29,7 @@ $carlist = $database->getObject($connection,'auto',array('*'));
             </div>
             <div class="ms-2 col-5 primary-colour" style="top: 15%; left: 10%; right: 10%; opacity: 0.9;">
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col-7">
                         <h1 class="text-center text-white">Autobeheer</h1>
                     </div>
                     <div class="col-3 mt-2">
@@ -37,7 +37,7 @@ $carlist = $database->getObject($connection,'auto',array('*'));
                     </div>
                 </div>
                 <hr class="bg-white">
-                <div class="overflow-auto overflow-scroll">
+                <div class=" overflow-scroll">
                     <?php
                     if (isset($carlist) && !empty($carlist)) {
                         foreach ($carlist as $car) {

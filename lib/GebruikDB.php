@@ -25,11 +25,12 @@ class GebruikDB {
      * @param array $object
      * @param string $table
      */
-    public function makeObject(mysqli $connection, array $object, $table){
+    public function makeObject(mysqli $connection, array $object, $table)
+    {
         $coloms = implode(", ", array_keys($object));
         $values = implode("','", array_values($object));
         $query = "REPLACE INTO $table ($coloms) VALUES ('$values')";
-        if ($stmt = $connection->prepare($query))   {
+        if ($stmt = $connection->prepare($query)) {
             $stmt->execute();
             if (!$stmt->affected_rows > 0) {
                 exit('object niet aangemaakt');
@@ -44,11 +45,12 @@ class GebruikDB {
         $object = [];
         //pak de velden die ingevoerd zijn in de array
         $fields = implode(", ", array_values($fields));
-        if (isset($params)) {
+        if (isset($param)) {
             $query = "SELECT $fields FROM $table WHERE $param";
         } else {
             $query = "SELECT $fields FROM $table";
         }
+        if (isset($costumQuery)) $query = $costumQuery;
 
         $result = $connection->query($query);
         if (mysqli_num_rows($result) == 0) {
@@ -61,6 +63,34 @@ class GebruikDB {
             }
         }
         return $object;
+    }
+
+    public function updateObject(mysqli $connection, array $object, $table){
+        $query = "UPDATE $table SET ";
+        $sql_condition = null;
+        foreach($object as $key=>$value) {
+            if($key == 'idauto'){
+                $sql_condition = " WHERE " . $key . " = " . $value;
+                continue;
+            }
+            if(is_numeric($value))
+                $query .= $key . " = " . $value . ", ";
+            else
+                $query .= $key . " = " . "'" . $value . "'" . ", ";
+        }
+
+        $query = trim($query, ' '); // first trim last space
+        $query = trim($query, ','); // then trim trailing and prefixing commas
+
+        $query .= $sql_condition;
+        if ($stmt = $connection->prepare($query)) {
+            $stmt->execute();
+            if (!$stmt->affected_rows > 0) {
+                exit('object niet geupdate');
+            }
+        }else{
+            exit($connection->error);
+        }
     }
 
     /**
