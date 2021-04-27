@@ -37,18 +37,40 @@ $carlist = $database->getObject($connection,'auto',array('*'));
                     </div>
                 </div>
                 <hr class="bg-white">
-                <div class=" overflow-scroll">
                     <?php
                     if (isset($carlist) && !empty($carlist)) {
                         foreach ($carlist as $car) {
-                           $temp = $database->getObject($connection,'prijs',array('type','dagprijs'),'idprijs='.(int)$car['idprijs']);
+                            $temp = $database->getObject($connection,'prijs',array('type','dagprijs'),'idprijs='.(int)$car['idprijs']);
                             $car['type'] = $temp[0]['type'];
                             $car['dagprijs'] = $temp[0]['dagprijs'];
-                            echo $utilities->generateTemplate('cards/auto.php', $car);
+                            echo '<div class="col-12  d-flex align-items-stretch">';
+                            echo '<div class="card mb-3">
+                                        <div class="row g-0">
+                                                <div class="col-md-4 overflow-hidden">
+                                                    <img width="" style="width: 100%;max-width: 100%" src="'.$car['afbeelding'].'" alt="...">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <h5 class="card-title w-50">'.$car['naam'].'</h5>
+                                                            <h5 class="text-end card-title w-50">Status: '.$car['status'].'</h5>
+                                                        </div>
+                                                        <p class="card-text p-1">'.$car['beschrijving'].'</p>
+                                                        <p class="card-text"><small class="text-muted">Type '.$car['type'].'<br>Kenteken '.$car['kenteken'].'</small></p>
+                                                        <div class="row">
+                                                            <p class="card-text col-12">Dagprijs: &#8364;'.$car['dagprijs'].'</p><br>
+                                                            <form method="post" class="col-5" action="autoDetail.php">';
+                                                            echo '<button type="submit" name="id" value="'.$car['idauto'].'" class="btn btn-primary text-white rounded-pill">Bekijken</button></form>
+                                                            <div class="col-5"><a class="btn btn-primary text-white rounded-pill" href="autoBeheer.php?id='.$car['idauto'].'">Bewerken</a></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                 </div>';
                         }
                     }
                     ?>
-                </div>
             </div>
          </div>
     </div>
