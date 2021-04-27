@@ -130,5 +130,8 @@ if (isset($_POST['bestelling']) && !empty($_POST['bestelling'])){
     $bestelling['idgebruikers'] = (int)$bestelling['idgebruikers'];
     $bestelling['totaalprijs'] = (int)$bestelling['totaalprijs'];
 
-    var_dump($bestelling);die();
+    $bestelling['begindatum'] = date("Y-m-d",strtotime($bestelling['begindatum']));
+    $bestelling['einddatum'] = date("Y-m-d",strtotime($bestelling['einddatum']));
+    var_dump($bestelling);die;
+    //maak factuur
 }

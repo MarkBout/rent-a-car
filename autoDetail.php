@@ -44,11 +44,11 @@ if ($stmt = $connection->prepare('SELECT idauto FROM auto WHERE idauto = ?')){
                                     <div class="row">
                                         <div class="col-6">
                                             <label for="begindatum">Datum ophalen</label>
-                                            <input type="datetime-local" id="begindatum" name="bestelling[begindatum]" class="form-control" placeholder="yyyy-mm-dd">
+                                            <input type="date" id="begindatum" name="bestelling[begindatum]" class="form-control" placeholder="yyyy-mm-dd">
                                         </div>
                                         <div class="col-6">
                                             <label for="einddatum">Datum terugbregen</label>
-                                            <input type="datetime-local" id="einddatum" name="bestelling[einddatum]" class="form-control" placeholder="yyyy-mm-dd">
+                                            <input type="date" id="einddatum" name="bestelling[einddatum]" class="form-control" placeholder="yyyy-mm-dd">
                                         </div>
                                     </div>
                                     <button type="button" class="mt-1 mb-1 btn btn-success btn-sm" onclick="checkOut()">Datum controleren en prijs berekenen</button>
