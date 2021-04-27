@@ -100,7 +100,6 @@ if (isset($_POST['profile']) && !empty($_POST['profile'])){
 
 //Nieuwe auto toevoegen
 if (isset($_POST['auto']) && !empty($_POST['auto'])) {
-    //todo fix
     $car = $_POST['auto'];
     unset($_POST['auto']);
     if (isset($car['idauto'])) $car['idauto'] = (int) $car['idauto'];
@@ -121,5 +120,15 @@ if (isset($_POST['auto']) && !empty($_POST['auto'])) {
         $database->makeObject($connection,$car,'auto');
     }
     $utilities->redirect('../medewerkers.php');
+}
 
+//een bestelling maken
+if (isset($_POST['bestelling']) && !empty($_POST['bestelling'])){
+    $bestelling = $_POST['bestelling'];
+    unset($_POST['bestelling']);
+    $bestelling['idauto'] = (int)$bestelling['idauto'];
+    $bestelling['idgebruikers'] = (int)$bestelling['idgebruikers'];
+    $bestelling['totaalprijs'] = (int)$bestelling['totaalprijs'];
+
+    var_dump($bestelling);die();
 }
