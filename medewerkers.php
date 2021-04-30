@@ -12,12 +12,11 @@ $carlist = $database->getObject($connection,'auto',array('*'));
     <title>Medewerkers | Rent a Car</title>
 </head>
 <body class="bg-soft-white">
-    <div class="container-fluid">
-        <div class="row position-absolute" style="top: 15%; left: 10%; right: 10%;">
+<div class="row position-absolute" style="top: 15%; left: 10%; right: 10%;">
             <div class="me-2 col-5 primary-colour" style="top: 15%; left: 10%; right: 10%; opacity: 0.9">
                 <div class="row">
                     <div class="col-8">
-                        <h1 class="text-center text-white">Overzicht verhuurde auto's</h1>
+                        <h2 class="text-center text-white">Overzicht verhuurde auto's</h2>
                     </div>
                     <div class="col-3 mt-2">
                         <button type="button" class="btn btn-primary btn-lg rounded-pill">Printen</button>
@@ -27,7 +26,7 @@ $carlist = $database->getObject($connection,'auto',array('*'));
                 <?php/**Todo get rented cars from DB and display them**/?>
 
             </div>
-            <div class="ms-2 col-5 primary-colour" style="top: 15%; left: 10%; right: 10%; opacity: 0.9;">
+            <div class="ms-2 col-5 primary-colour " style=" height: auto;top: 15%; left: 10%; right: 10%; opacity: 0.9;">
                 <div class="row">
                     <div class="col-7">
                         <h1 class="text-center text-white">Autobeheer</h1>
@@ -37,13 +36,14 @@ $carlist = $database->getObject($connection,'auto',array('*'));
                     </div>
                 </div>
                 <hr class="bg-white">
+                <div class="box">
                     <?php
                     if (isset($carlist) && !empty($carlist)) {
                         foreach ($carlist as $car) {
                             $temp = $database->getObject($connection,'prijs',array('type','dagprijs'),'idprijs='.(int)$car['idprijs']);
                             $car['type'] = $temp[0]['type'];
                             $car['dagprijs'] = $temp[0]['dagprijs'];
-                            echo '<div class="col-12  d-flex align-items-stretch">';
+//                            echo '<div class="col-12  d-flex align-items-stretch">';
                             echo '<div class="card mb-3">
                                         <div class="row g-0">
                                                 <div class="col-md-4 overflow-hidden">
@@ -60,20 +60,20 @@ $carlist = $database->getObject($connection,'auto',array('*'));
                                                         <div class="row">
                                                             <p class="card-text col-12">Dagprijs: &#8364;'.$car['dagprijs'].'</p><br>
                                                             <form method="post" class="col-5" action="autoDetail.php">';
-                                                            echo '<button type="submit" name="id" value="'.$car['idauto'].'" class="btn btn-primary text-white rounded-pill">Bekijken</button></form>
+                            echo '<button type="submit" name="id" value="'.$car['idauto'].'" class="btn btn-primary text-white rounded-pill">Bekijken</button></form>
                                                             <div class="col-5"><a class="btn btn-primary text-white rounded-pill" href="autoBeheer.php?id='.$car['idauto'].'">Bewerken</a></div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                 </div>';
+                                    ';
                         }
                     }
                     ?>
+                </div>
             </div>
          </div>
-    </div>
     <script>
         function sendDownload(table_id, separator = ',') {
             // Select rows from table_id

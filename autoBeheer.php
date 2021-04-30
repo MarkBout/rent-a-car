@@ -1,5 +1,6 @@
 <?php
 include 'navbar.php';
+include 'modals/prijs.php';
 if (!isset($_SESSION['gebruiker']) || $_SESSION['gebruiker']['rol'] != 1){
     $utilities->redirect('index.php');
 }
@@ -23,7 +24,6 @@ $prijzen = $database->getObject($connection,'prijs',array('*'));
         <div class="container position-absolute primary-colour" style="top: 15%; left: 10%; right: 10%; opacity: 0.9">
             <div class="row">
                 <?php if (isset($auto)):
-                    var_dump($auto);
                 echo "<h1 class='text-center text-white'>".$auto['naam']." ".$auto['kenteken']." aanpassen</h1>";
                 else:
                 echo '<h1 class="text-center text-white">Nieuwe auto toevoegen</h1>';
@@ -79,9 +79,9 @@ $prijzen = $database->getObject($connection,'prijs',array('*'));
                                     endforeach;
                                     ?>
                                 </select>
-                            </div>
+                            </div><br>
                             <div class="col-2">
-                                <button type="button" class="btn btn-primary rounded-pill" onclick="nieuwePrijs()">Nieuwe prijs</button>
+                                <button type="button" class="btn btn-primary rounded-pill mt-1" data-bs-toggle="modal" data-bs-target="#prijsModal">Nieuwe prijs</button>
                             </div>
                         </div>
                         <div class="row">
@@ -90,30 +90,7 @@ $prijzen = $database->getObject($connection,'prijs',array('*'));
                                 <textarea class="form-control" id="beschrijving" rows="6    " name="auto[beschrijving]" ><?php if (isset($auto['beschrijving'])) echo $auto['beschrijving']?> </textarea>
                             </div>
                         </div>
-                        <?/**todo make this into modal**/?>
-                        <div id="newprice" class="row d-none">
-                            <div class="col-4">
-                                <label for="merk" class="form-label text-white">Merk auto</label>
-                                <select class="form-select form-select-sm" id="merk" name="prijs[merk]" required>
-                                    <?/**Todo haal merken en types uit db en zet erin**/ ?>
-                                    <option selected value="toyota">Toyota</option>
-                                </select>
-                                <button type="button" class="btn btn-primary mt-2 rounded-pill">Prijs toevoegen</button>
-                            </div>
-                            <div class="col-4">
-                                <label for="type" class="form-label text-white">Type auto</label>
-                                <select class="form-select form-select-sm" id="type" name="prijs[type]" required>
-                                    <?/**Todo haal merken en types uit db en zet erin**/ ?>
-                                    <option selected value="toyota">Cabriolet</option>
-                                </select>
-                            </div>
-                            <div class="col-4">
-                                <label for="dagprijs" class="form-label text-white">Dagprijs</label>
-                                <input type="text" class="form-control form-control-sm" id="dagprijs" name="prijs[dagprijs]">
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn ms-auto me-2 col-3 btn-primary rounded-pill">Opslaan</button>
+                    <button type="submit" class="btn ms-auto me-2 col-6 mt-2 btn-primary rounded-pill">Opslaan</button>
                 </form>
         </div>
     </div>
@@ -127,11 +104,9 @@ $prijzen = $database->getObject($connection,'prijs',array('*'));
            var test = reader.readAsDataURL(event.target.files[0]);
            console.log(test)
         };
-
-        function nieuwePrijs() {
-            var newprice = document.getElementById('newprice');
-            newprice.classList.remove("d-none");
-        }
+        $('#prijsModal').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset');
+        })
     </script>
 </body>
 </html>

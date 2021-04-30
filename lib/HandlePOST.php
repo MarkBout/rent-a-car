@@ -113,6 +113,7 @@ if (isset($_POST['auto']) && !empty($_POST['auto'])) {
     }else{
         unset($car['afbeelding'], $afbeelding);
     }
+    $car['beschrijving'] = $connection->escape_string($car['beschrijving']);
     //update or make car
     if (isset($car['idauto'])){
         $database->updateObject($connection,$car,'auto');
@@ -134,4 +135,12 @@ if (isset($_POST['bestelling']) && !empty($_POST['bestelling'])){
     $bestelling['einddatum'] = date("Y-m-d",strtotime($bestelling['einddatum']));
     var_dump($bestelling);die;
     //maak factuur
+}
+
+if (isset($_POST['newprice']) && !empty($_POST['newprice'])){
+    $newprice = $_POST['newprice'];
+    unset($_POST['newprice']);
+    $newprice['dagprijs'] = (int)$newprice['dagprijs'];
+    $database->makeObject($connection,$newprice,'prijs');
+    $utilities->redirect('../autoBeheer.php');
 }

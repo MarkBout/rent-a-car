@@ -51,7 +51,7 @@ if ($stmt = $connection->prepare('SELECT idauto FROM auto WHERE idauto = ?')){
                                             <input type="date" id="einddatum" name="bestelling[einddatum]" class="form-control" placeholder="yyyy-mm-dd">
                                         </div>
                                     </div>
-                                    <button type="button" class="mt-1 mb-1 btn btn-success btn-sm" onclick="checkOut()">Datum controleren en prijs berekenen</button>
+                                    <button type="button" class="mt-1 mb-1 btn btn-success btn-sm"style="word-break: break-word" onclick="checkOut()">Datum controleren en prijs berekenen</button>
                                     <div id="prijzen">
 
                                     </div>
