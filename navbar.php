@@ -59,6 +59,7 @@ $connection = $database->setConn('localhost', 'root',null,'rent-a-car');
                             <?php if(isset($_SESSION['gebruiker']) && $_SESSION['gebruiker']['rol'] == 1): ?>
                             <li><a class="dropdown-item text-white" href="medewerkers.php">Medewerkers pagina</a></li>
                             <?php endif;?>
+                            <li><a class="dropdown-item text-white" href="winkelwagen.php">Wienkelwagen</a></li>
                             <li><a class="dropdown-item text-white" href="logout.php">Uitloggen</a></li>
                         </ul>
                     </li>

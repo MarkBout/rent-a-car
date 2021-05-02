@@ -24,6 +24,7 @@ class GebruikDB {
      * @param mysqli $connection
      * @param array $object
      * @param string $table
+     * @return int new id
      */
     public function makeObject(mysqli $connection, array $object, $table)
     {
@@ -34,6 +35,8 @@ class GebruikDB {
             $stmt->execute();
             if (!$stmt->affected_rows > 0) {
                 exit('object niet aangemaakt');
+            }else{
+                return $stmt->insert_id;
             }
         }else{
             exit($connection->error);

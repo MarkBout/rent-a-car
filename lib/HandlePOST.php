@@ -123,6 +123,15 @@ if (isset($_POST['auto']) && !empty($_POST['auto'])) {
     $utilities->redirect('../medewerkers.php');
 }
 
+//prijs toevoegen
+if (isset($_POST['newprice']) && !empty($_POST['newprice'])){
+    $newprice = $_POST['newprice'];
+    unset($_POST['newprice']);
+    $newprice['dagprijs'] = (int)$newprice['dagprijs'];
+    $database->makeObject($connection,$newprice,'prijs');
+    $utilities->redirect('../autoBeheer.php');
+}
+
 //een bestelling maken
 if (isset($_POST['bestelling']) && !empty($_POST['bestelling'])){
     $bestelling = $_POST['bestelling'];
@@ -133,14 +142,36 @@ if (isset($_POST['bestelling']) && !empty($_POST['bestelling'])){
 
     $bestelling['begindatum'] = date("Y-m-d",strtotime($bestelling['begindatum']));
     $bestelling['einddatum'] = date("Y-m-d",strtotime($bestelling['einddatum']));
-    var_dump($bestelling);die;
-    //maak factuur
+    if (empty($_SESSION['cart'])){
+        $_SESSION['cart'] = array();
+    }
+    array_push($_SESSION['cart'],$bestelling);
+    $utilities->redirect('../winkelwagen');
+}
+//remove order from cart
+if (isset($_POST['delete']) && !empty($_POST['delete'])){
+
+    $sleutel = (int)$_POST['delete']['key'];
+    unset($_POST['delete']);
+    unset($_SESSION['cart'][$sleutel]);
+    $utilities->redirect('../winkelwagen.php');
+}
+//bestelling afronden
+if (isset($_POST['finishOrder']) && !empty($_POST['finishOrder'])){
+    $orderKey = $_POST['finishOrder']['key'];
+    unset($_POST['finishOrder']);
+    $factuur = array();
+    $factuur['datum'] = date("Y-m-d");
+    $factuur['betaald'] = 0;
+    $order = $_SESSION['cart'][$orderKey];
+    unset($order['totaalprijs']);
+    $order['idfactuur'] = $database->makeObject($connection,$factuur,'factuur');
+    $database->makeObject($connection,$order,'bestelling');
+    unset($_SESSION['cart'][$orderKey]);
+    //set car status to rented
+    $auto = $database->getObject($connection,'auto',array('*'),'idauto='.$order['idauto'])[0];
+    $auto['status'] = 'rented';
+    $database->updateObject($connection,$auto,'auto');
+    $utilities->redirect('../Profiel.php');
 }
 
-if (isset($_POST['newprice']) && !empty($_POST['newprice'])){
-    $newprice = $_POST['newprice'];
-    unset($_POST['newprice']);
-    $newprice['dagprijs'] = (int)$newprice['dagprijs'];
-    $database->makeObject($connection,$newprice,'prijs');
-    $utilities->redirect('../autoBeheer.php');
-}

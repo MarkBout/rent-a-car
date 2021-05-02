@@ -56,7 +56,7 @@ if ($stmt = $connection->prepare('SELECT idauto FROM auto WHERE idauto = ?')){
 
                                     </div>
                                     <div class="card-footer text-center">
-                                        <button type="submit" id="huren" value="" class="btn btn-primary text-white rounded-pill" disabled>Auto huren</button>
+                                        <button type="submit" id="huren" value="" class="btn btn-primary text-white rounded-pill" disabled>in winkelmand</button>
                                     </div>
                                 </form>
                                 <?php else: ?>
@@ -73,7 +73,7 @@ if ($stmt = $connection->prepare('SELECT idauto FROM auto WHERE idauto = ?')){
             function checkOut() {
                 var start_date = document.getElementById('begindatum').value;
                 var end_date = document.getElementById('einddatum').value;
-               const days =  Math.floor(( Date.parse(end_date) - Date.parse(start_date) ) / 86400000);
+               const days =  Math.floor(( Date.parse(end_date) - Date.parse(start_date) ) / 86400000) + 1;
                const dagenp = document.createElement('p');
                dagenp.innerHTML = "Gekozen dagen "+ days;
                dagenp.setAttribute('class','m-0');
@@ -81,6 +81,9 @@ if ($stmt = $connection->prepare('SELECT idauto FROM auto WHERE idauto = ?')){
                dagprijs = <?php echo $auto['prijs']['dagprijs'];?>;
                totaalprijs = dagprijs * days;
                const totaalp = document.createElement('p');
+               if (days < 2){
+                   totaalprijs = dagprijs;
+               }
                totaalp.innerHTML = "Totaalprijs €"+totaalprijs;
                totaalp.setAttribute('class','m-0');
                document.getElementById('prijzen').appendChild(totaalp);
