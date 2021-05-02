@@ -116,7 +116,7 @@ if (isset($_POST['auto']) && !empty($_POST['auto'])) {
     $car['beschrijving'] = $connection->escape_string($car['beschrijving']);
     //update or make car
     if (isset($car['idauto'])){
-        $database->updateObject($connection,$car,'auto');
+        $database->updateObject($connection,$car,'auto','idauto');
     }else{
         $database->makeObject($connection,$car,'auto');
     }
@@ -148,6 +148,7 @@ if (isset($_POST['bestelling']) && !empty($_POST['bestelling'])){
     array_push($_SESSION['cart'],$bestelling);
     $utilities->redirect('../winkelwagen');
 }
+
 //remove order from cart
 if (isset($_POST['delete']) && !empty($_POST['delete'])){
 
@@ -156,6 +157,7 @@ if (isset($_POST['delete']) && !empty($_POST['delete'])){
     unset($_SESSION['cart'][$sleutel]);
     $utilities->redirect('../winkelwagen.php');
 }
+
 //bestelling afronden
 if (isset($_POST['finishOrder']) && !empty($_POST['finishOrder'])){
     $orderKey = $_POST['finishOrder']['key'];
@@ -171,7 +173,7 @@ if (isset($_POST['finishOrder']) && !empty($_POST['finishOrder'])){
     //set car status to rented
     $auto = $database->getObject($connection,'auto',array('*'),'idauto='.$order['idauto'])[0];
     $auto['status'] = 'rented';
-    $database->updateObject($connection,$auto,'auto');
+    $database->updateObject($connection,$auto,'auto', 'idauto');
     $utilities->redirect('../Profiel.php');
 }
 

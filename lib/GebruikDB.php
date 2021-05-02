@@ -68,11 +68,11 @@ class GebruikDB {
         return $object;
     }
 
-    public function updateObject(mysqli $connection, array $object, $table){
+    public function updateObject(mysqli $connection, array $object, $table, $id){
         $query = "UPDATE $table SET ";
         $sql_condition = null;
         foreach($object as $key=>$value) {
-            if($key == 'idauto'){
+            if($key == $id){
                 $sql_condition = " WHERE " . $key . " = " . $value;
                 continue;
             }
