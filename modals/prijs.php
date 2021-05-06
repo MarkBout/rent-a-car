@@ -55,9 +55,12 @@ $types = $database->getObject($connection,'prijs',array('type'));
 <script>
 function newPrice() {
     $('#newprice').removeClass("d-none");
-
+    $('#prijsform').addClass("d-none");
+    $('#prijsform form')[0].reset();
 }
 function existingPrice() {
     $('#prijsform').removeClass("d-none");
+    $('#newprice').addClass("d-none");
+    $('#newprice form')[0].reset();
 }
 </script>
