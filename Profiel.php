@@ -5,13 +5,15 @@ $gebruiker = $_SESSION['gebruiker'];
 //bestellingen ophalen
 $bestellingen = $database->getObject($connection,'bestelling',array('*'),'idgebruikers='.$gebruiker['idgebruikers']);
 //objecten die bij de bestelling horen ophalen en toevoegen aan de array
-foreach ($bestellingen as $key => $orders){
-    $orders['auto'] = $database->getObject($connection,'auto',array('naam','kenteken','idprijs'),'idauto='.$orders['idauto'])[0];
-    unset($orders['idauto']);
-    unset($bestellingen[$key]['idauto']);
-    $orders['auto']['prijs'] = $database->getObject($connection,'prijs',array('merk','type','dagprijs'),'idprijs='.$orders['auto']['idprijs'])[0];
-    unset($orders['auto']['idprijs']);
-    $bestellingen[$key] = $orders;
+if (isset($bestellingen) && !empty($bestellingen)){
+    foreach ($bestellingen as $key => $orders){
+        $orders['auto'] = $database->getObject($connection,'auto',array('naam','kenteken','idprijs'),'idauto='.$orders['idauto'])[0];
+        unset($orders['idauto']);
+        unset($bestellingen[$key]['idauto']);
+        $orders['auto']['prijs'] = $database->getObject($connection,'prijs',array('merk','type','dagprijs'),'idprijs='.$orders['auto']['idprijs'])[0];
+        unset($orders['auto']['idprijs']);
+        $bestellingen[$key] = $orders;
+    }
 }
 ?>
 <!doctype html>
@@ -93,6 +95,7 @@ foreach ($bestellingen as $key => $orders){
                     </div>
                 </form>
                     <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+                        <?php if (isset($bestellingen) && !empty($bestellingen)): ?>
                         <table class="table text-center text-white" border="1" id="bestelling">
                             <thead>
                             <tr>
@@ -122,6 +125,9 @@ foreach ($bestellingen as $key => $orders){
                             <?php endforeach; ?>
                             </tbody>
                         </table>
+                        <?php else:?>
+                        <h4 class="text-center mt-1 text-white">U heeft nog geen bestellingen</h4>
+                        <?php endif;?>
             </div>
         </div>
     </div>
