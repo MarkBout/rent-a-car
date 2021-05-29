@@ -1,8 +1,9 @@
 <?php
 include 'navbar.php';
 //id ophalen uit bekijken knop
-if (isset($_POST['id']) && !empty($_POST['id']))
+if (isset($_POST['id']) && !empty($_POST['id'])){
     $id = (int)$_POST['id'];
+}elseif (isset($_GET['id']) && !empty($_GET['id'])) $id = (int)$_GET['id'];
 //check if car exists
 if ($stmt = $connection->prepare('SELECT idauto FROM auto WHERE idauto = ?')){
     $stmt->bind_param('i',$id);
@@ -51,7 +52,7 @@ if ($stmt = $connection->prepare('SELECT idauto FROM auto WHERE idauto = ?')){
                                             <input type="date" id="einddatum" name="bestelling[einddatum]" class="form-control" placeholder="yyyy-mm-dd">
                                         </div>
                                     </div>
-                                    <button type="button" class="mt-1 mb-1 btn btn-success btn-sm"style="word-break: break-word" onclick="checkOut()">Datum controleren en prijs berekenen</button>
+                                    <button type="button" class="mt-1 mb-1 btn btn-success btn-sm" style="word-break: break-word" onclick="checkOut()" <?php if ($auto['status'] === 'rented'):?> disabled<?php endif;?>>Datum controleren en prijs berekenen</button>
                                     <div id="prijzen">
 
                                     </div>

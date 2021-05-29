@@ -162,15 +162,18 @@ if (isset($_POST['delete']) && !empty($_POST['delete'])){
 if (isset($_POST['finishOrder']) && !empty($_POST['finishOrder'])){
     $orderKey = $_POST['finishOrder']['key'];
     unset($_POST['finishOrder']);
+    //factuur aanmaken
     $factuur = array();
     $factuur['datum'] = date("Y-m-d");
     $factuur['betaald'] = 0;
+    //bestelling ophalen
     $order = $_SESSION['cart'][$orderKey];
     unset($order['totaalprijs']);
+    //bestelling & factuur opslaan
     $order['idfactuur'] = $database->makeObject($connection,$factuur,'factuur');
     $database->makeObject($connection,$order,'bestelling');
+    //bestelling uit winkelmand halen & de auto op verhuurd zetten
     unset($_SESSION['cart'][$orderKey]);
-    //set car status to rented
     $auto = $database->getObject($connection,'auto',array('*'),'idauto='.$order['idauto'])[0];
     $auto['status'] = 'rented';
     $database->updateObject($connection,$auto,'auto', 'idauto');

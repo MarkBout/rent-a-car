@@ -12,113 +12,90 @@ $carlist = $database->getObject($connection,'auto',array('*'));
     <title>Medewerkers | Rent a Car</title>
 </head>
 <body class="bg-soft-white">
-<div class="row position-absolute" style="top: 15%; left: 10%; right: 10%;">
-            <div class="me-2 col-5 primary-colour" style="top: 15%; left: 10%; right: 10%; opacity: 0.9">
-                <div class="row">
-                    <div class="col-8">
-                        <h2 class="text-center text-white">Overzicht verhuurde auto's</h2>
-                    </div>
-                    <div class="col-3 mt-2">
-                        <button type="button" class="btn btn-primary btn-lg rounded-pill">Printen</button>
-                    </div>
-                </div>
-                <hr class="bg-white">
-                <div class="box">
-                    <?php
-                    $rentedCars = $database->getObject($connection, 'auto',array('*'),'status="rented"');
-                    ?>
-                    <?php
-                    if (isset($rentedCars) && !empty($rentedCars)) {
-                        foreach ($rentedCars as $car) {
-                            $temp = $database->getObject($connection,'prijs',array('type','dagprijs'),'idprijs='.(int)$car['idprijs']);
-                            $car['type'] = $temp[0]['type'];
-                            $car['dagprijs'] = $temp[0]['dagprijs'];
-                            $car['bestelling'] = $database->getObject($connection,'bestelling',array('*'),'idauto='.$car['idauto'])[0];
-                            $car['bestelling']['gebruiker'] = $database->getObject($connection, 'gebruiker',array('voornaam','tussenvoegsel','achternaam'),'idgebruikers='.$car['bestelling']['idgebruikers'])[0];
-//                            echo '<div class="col-12  d-flex align-items-stretch">';
-                            echo '<div class="card mb-3">
-                                        <div class="row g-0">
-                                                <div class="col-md-4 overflow-hidden">
-                                                    <img width="" style="width: 100%;max-width: 100%" src="'.$car['afbeelding'].'" alt="...">
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <div class="card-body">
-                                                        <div class="row">
-                                                            <h5 class="card-title w-50">'.$car['naam'].'</h5>
-                                                            <h5 class="text-end card-title w-50">Status: '.$car['status'].'</h5>
-                                                        </div>
-                                                       `
-                                                        <p class="card-text"><small class="text-muted">Type '.$car['type'].'<br>Kenteken '.$car['kenteken'].'</small></p>
-                                                        <div class="row">
-                                                            <p class="card-text col-12">Dagprijs: &#8364;'.$car['dagprijs'].'</p><br>
-                                                            <form method="post" class="col-5" action="autoDetail.php">';
-                            echo '<button type="submit" name="id" value="'.$car['idauto'].'" class="btn btn-primary text-white rounded-pill">Bekijken</button></form>
-                                                            <div class="col-5"><a class="btn btn-primary text-white rounded-pill" href="autoBeheer.php?id='.$car['idauto'].'">Bewerken</a></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ';
-                        }
-                    }
-                    ?>
-
-
-                </div>
-                            </div>
-            <div class="ms-2 col-5 primary-colour " style=" height: auto;top: 15%; left: 10%; right: 10%; opacity: 0.9;">
-                <div class="row">
-                    <div class="col-7">
-                        <h1 class="text-center text-white">Autobeheer</h1>
-                    </div>
-                    <div class="col-3 mt-2">
-                        <a type="button" href="autoBeheer.php" class="btn btn-primary  rounded-pill">Auto toevoegen</a>
-                    </div>
-                </div>
-                <hr class="bg-white">
-                <div class="box">
-                    <?php
-                    if (isset($carlist) && !empty($carlist)) {
-                        foreach ($carlist as $car) {
-                            $temp = $database->getObject($connection,'prijs',array('type','dagprijs'),'idprijs='.(int)$car['idprijs']);
-                            $car['type'] = $temp[0]['type'];
-                            $car['dagprijs'] = $temp[0]['dagprijs'];
-//                            echo '<div class="col-12  d-flex align-items-stretch">';
-                            echo '<div class="card mb-3">
-                                        <div class="row g-0">
-                                                <div class="col-md-4 overflow-hidden">
-                                                    <img width="" style="width: 100%;max-width: 100%" src="'.$car['afbeelding'].'" alt="...">
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <div class="card-body">
-                                                        <div class="row">
-                                                            <h5 class="card-title w-50">'.$car['naam'].'</h5>
-                                                            <h5 class="text-end card-title w-50">Status: '.$car['status'].'</h5>
-                                                        </div>
-                                                        <p class="card-text p-1">'.$car['beschrijving'].'</p>
-                                                        <p class="card-text"><small class="text-muted">Type '.$car['type'].'<br>Kenteken '.$car['kenteken'].'</small></p>
-                                                        <div class="row">
-                                                            <p class="card-text col-12">Dagprijs: &#8364;'.$car['dagprijs'].'</p><br>
-                                                            <form method="post" class="col-5" action="autoDetail.php">';
-                            echo '<button type="submit" name="id" value="'.$car['idauto'].'" class="btn btn-primary text-white rounded-pill">Bekijken</button></form>
-                                                            <div class="col-5"><a class="btn btn-primary text-white rounded-pill" href="autoBeheer.php?id='.$car['idauto'].'">Bewerken</a></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ';
-                        }
-                    }
-                    ?>
-                </div>
+    <div class="row position-absolute primary-colour" style="top: 15%; left: 10%; right: 10%;">
+        <h1 class="text-center text-white">Medewerkerspagina</h1>
+        <nav>
+            <div class="nav nav-tabs mt-1" id="nav-tab" role="tablist" style="display: flex; justify-content: center; align-items: center;">
+                <button class="nav-link active btn-primary" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#beheer" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Beheer</button>
+                <button class="nav-link btn-primary" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#verhuurd" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Verhuurd</button>
             </div>
-         </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="beheer" role="tabpanel" aria-labelledby="nav-home-tab">
+                <table class="table text-center text-white" id="management" border="1">
+                    <thead>
+                    <tr>
+                        <th scope="col">Afbeelding</th>
+                        <th scope="col">Naam</th>
+                        <th scope="col">Kenteken</th>
+                        <th scope="col">Beschrijving</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Dagprijs</th>
+                        <th scope="col">Opties</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($carlist as $car):
+                        $temp = $database->getObject($connection,'prijs',array('type','dagprijs'),'idprijs='.(int)$car['idprijs'])[0];
+                        $car['dagprijs'] = $temp['dagprijs'];
+                        ?>
+                        <tr>
+                            <td><img style="max-width:90%; max-height:90%;" src="<?php echo $car['afbeelding']?>" alt="foto van auto"> </td>
+                            <td><?php echo $car['naam'] ?></td>
+                            <td><?php echo $car['kenteken']?></td>
+                            <td><p class="text-start"><?php echo $car['beschrijving']?></p></td>
+                            <td><?php echo $car['status']?></td>
+                            <td>&euro;<?php echo $car['dagprijs']?></td>
+                            <td>
+                                <button class="mb-1 btn btn-primary rounded-pill">
+                                    <a class="text-white" style="text-decoration: none !important" href="autoBeheer.php?id=<?php echo $car['idauto']?>">Bewerken</a>
+                                </button>
+                                <a class="mt-1 btn btn-primary rounded-pill" href="autoDetail.php?id=<?php echo $car['idauto']?>">Bekijken</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="tab-pane fade" id="verhuurd" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <?php
+                $rentedCars = $database->getObject($connection, 'auto',array('*'),'status="rented"');
+                ?>
+                <table class="table text-center text-white" id="rentendCars" border="1">
+                    <thead>
+                    <tr>
+                        <th scope="col">Afbeelding</th>
+                        <th scope="col">Naam</th>
+                        <th scope="col">Kenteken</th>
+                        <th scope="col">Beschrijving</th>
+                        <th scope="col">Huurder</th>
+                        <th scope="col"><a class="btn btn-primary btn-md rounded-pill" onclick="sendDownload('rentendCars')">Print</a> </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($rentedCars as $car):
+                        $huurder = $database->getObject($connection,'bestelling',array('idgebruikers'),'idauto='.$car['idauto'])[0];
+                        $huurderGegevens = $database->getObject($connection,'gebruiker', array('voornaam','tussenvoegsel','achternaam'), 'idgebruikers='.(int)$huurder['idgebruikers'])[0];
+                        ?>
+                        <tr>
+                            <td><img style="max-width:50%; max-height:50%;" src="<?php echo $car['afbeelding']?>" alt="foto van auto"> </td>
+                            <td><?php echo $car['naam'] ?></td>
+                            <td><?php echo $car['kenteken']?></td>
+                            <td><p class="text-start"><?php echo $car['beschrijving']?></p></td>
+                            <td><?php echo $huurderGegevens['voornaam'].' '.$huurderGegevens['tussenvoegsel'].' '.$huurderGegevens['achternaam'];?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
     <script>
         function sendDownload(table_id, separator = ',') {
             // Select rows from table_id
-            var rows = document.querySelectorAll('#' + table_id + ' tr');
+            var rows = document.querySelectorAll('table#' + table_id + ' tr');
             // Construct csv
             var csv = [];
             for (var i = 0; i < rows.length; i++) {
@@ -135,7 +112,7 @@ $carlist = $database->getObject($connection,'auto',array('*'));
             }
             var csv_string = csv.join('\n');
             // Download it
-            var filename = 'export_' + table_id + '_' + '{{ event.name }}' + '.csv';
+            var filename = 'export_' + table_id + '_' + new Date().toLocaleDateString() + '.csv';
             var link = document.createElement('a');
             link.style.display = 'none';
             link.setAttribute('target', '_blank');

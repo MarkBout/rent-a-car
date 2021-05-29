@@ -30,8 +30,7 @@ if (isset($bestellingen) && !empty($bestellingen)){
             unset($_SESSION['message']);
         }
         ?>
-
-            <div class="row">
+        <div class="row">
                 <div class="col-md-12">
                     <div class="profile-head">
                         <ul class="nav nav-tabs" id="myTab" role="tablist"  style="display: flex; justify-content: center; align-items: center;">

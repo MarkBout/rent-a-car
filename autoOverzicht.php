@@ -29,6 +29,7 @@ $carlist = $database->getObject($connection,'auto',array('*'), "status='availabl
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <h5 class="card-title w-50">'.$car['naam'].'</h5>
+                                                            <h5 class="text-end card-title w-50">Status: '.$car['status'].'</h5>
                                                         </div>
                                                         <p class="card-text p-1">'.$car['beschrijving'].'</p>
                                                         <p class="card-text"><small class="text-muted">Type '.$car['type'].'<br>Kenteken '.$car['kenteken'].'</small></p>
