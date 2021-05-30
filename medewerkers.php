@@ -4,6 +4,7 @@ if (!isset($_SESSION['gebruiker']) || $_SESSION['gebruiker']['rol'] != 1){
     $utilities->redirect('index.php');
 }
 $carlist = $database->getObject($connection,'auto',array('*'));
+$rentedCars = $database->getObject($connection, 'auto',array('*'),'status="rented"');
 
 ?>
 <!doctype html>
@@ -22,7 +23,7 @@ $carlist = $database->getObject($connection,'auto',array('*'));
         </nav>
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="beheer" role="tabpanel" aria-labelledby="nav-home-tab">
-                <table class="table text-center text-white" id="management" border="1">
+                <table class="table text-center text-white" id="management">
                     <thead>
                     <tr>
                         <th scope="col">Afbeelding</th>
@@ -58,33 +59,27 @@ $carlist = $database->getObject($connection,'auto',array('*'));
                 </table>
             </div>
 
-
             <div class="tab-pane fade" id="verhuurd" role="tabpanel" aria-labelledby="nav-profile-tab">
-                <?php
-                $rentedCars = $database->getObject($connection, 'auto',array('*'),'status="rented"');
-                ?>
-                <table class="table text-center text-white" id="rentendCars" border="1">
+                <table class="table table-image text-white" id="rentendCars" border="1">
                     <thead>
-                    <tr>
-                        <th scope="col">Afbeelding</th>
+                    <tr class="text-start">
                         <th scope="col">Naam</th>
                         <th scope="col">Kenteken</th>
-                        <th scope="col">Beschrijving</th>
+                        <th scope="col">Periode</th>
                         <th scope="col">Huurder</th>
                         <th scope="col"><a class="btn btn-primary btn-md rounded-pill" onclick="sendDownload('rentendCars')">Print</a> </th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php foreach ($rentedCars as $car):
-                        $huurder = $database->getObject($connection,'bestelling',array('idgebruikers'),'idauto='.$car['idauto'])[0];
+                        $huurder = $database->getObject($connection,'bestelling',array('idgebruikers','begindatum','einddatum'),'idauto='.$car['idauto'])[0];
                         $huurderGegevens = $database->getObject($connection,'gebruiker', array('voornaam','tussenvoegsel','achternaam'), 'idgebruikers='.(int)$huurder['idgebruikers'])[0];
                         ?>
                         <tr>
-                            <td><img style="max-width:50%; max-height:50%;" src="<?php echo $car['afbeelding']?>" alt="foto van auto"> </td>
                             <td><?php echo $car['naam'] ?></td>
                             <td><?php echo $car['kenteken']?></td>
-                            <td><p class="text-start"><?php echo $car['beschrijving']?></p></td>
-                            <td><?php echo $huurderGegevens['voornaam'].' '.$huurderGegevens['tussenvoegsel'].' '.$huurderGegevens['achternaam'];?></td>
+                            <td><p class="text-start text-nowrap"><?php  echo date("d/m/Y", strtotime($huurder['begindatum'])).' - '.date("d/m/Y", strtotime($huurder['einddatum'])); ?></p></td>
+                            <td colspan="2"><?php echo $huurderGegevens['voornaam'].' '.$huurderGegevens['tussenvoegsel'].' '.$huurderGegevens['achternaam'];?></td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>

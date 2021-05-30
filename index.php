@@ -2,6 +2,7 @@
 
 include 'navbar.php';
 //check session related stuff
+$afbeeldingen = $database->getObject($connection,'auto',array('afbeelding'));
 ?>
 <!doctype html>
 <html lang="en">
@@ -10,49 +11,16 @@ include 'navbar.php';
 </head>
 <body class="bg-soft-white">
     <div class="container-fluid position-relative">
-        <?/*@todo Make this dynamic and shorter*/ ?>
         <div class="h-100 w-100" style=" background-color: #FDF1E7; z-index: -98;">
             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="row h-100">
-                            <div class="col-xl-4">
-                                <img src="https://picsum.photos/id/1071/300/300" class="d-block w-100 h-100" alt="...">
-                            </div>
-                            <div class="col-xl-4">
-                                <img src="https://picsum.photos/id/183/300/300" class="d-block w-100 h-100" alt="...">
-                            </div>
-                            <div class="col-xl-4">
-                                <img src="https://picsum.photos/300" class="d-block w-100 h-100" alt="...">
-                            </div>
+                    <?php $active = true; ?>
+                    <?php foreach($afbeeldingen as $image):?>
+                        <div class="carousel-item <?php echo ($active == true)?"active":"" ?>">
+                            <img src="<?php echo $image['afbeelding'] ?>" class="d-block h-100 w-100" alt="...">
                         </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="row h-100">
-                            <div class="col-xl-4">
-                                <img src="https://picsum.photos/300" class="d-block w-100 h-100" alt="...">
-                            </div>
-                            <div class="col-xl-4">
-                                <img src="https://picsum.photos/300" class="d-block w-100 h-100" alt="...">
-                            </div>
-                            <div class="col-xl-4">
-                                <img src="https://picsum.photos/300" class="d-block w-100 h-100" alt="...">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="row h-100">
-                            <div class="col-xl-4">
-                                <img src="https://picsum.photos/300" class="d-block w-100 h-100" alt="...">
-                            </div>
-                            <div class="col-xl-4">
-                                <img src="https://picsum.photos/300" class="d-block w-100 h-100" alt="...">
-                            </div>
-                            <div class="col-xl-4">
-                                <img src="https://picsum.photos/300" class="d-block w-100 h-100" alt="...">
-                            </div>
-                        </div>
-                    </div>
+                        <?php $active = false; ?>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
