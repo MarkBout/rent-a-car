@@ -43,7 +43,7 @@ class GebruikDB {
         }
     }
 
-    public function getObject(mysqli $connection, $table, array $fields, $param = null)
+    public function getObject(mysqli $connection, $table, array $fields, $param = null, $costumQuery = null)
     {
         $object = [];
         //pak de velden die ingevoerd zijn in de array

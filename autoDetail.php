@@ -25,7 +25,7 @@ if ($stmt = $connection->prepare('SELECT idauto FROM auto WHERE idauto = ?')){
         <div class="container-fluid">
             <div class="container position-absolute primary-colour pb-2 pt-2" style="top: 15%; left: 10%; right: 10%; opacity: 0.9">
                 <div class="row">
-                    <img class="col-4" <?php if (isset($auto['afbeelding'])):?>src="<?php echo $auto['afbeelding']?>"<?php endif;?> src="#" id="output" alt=""/>
+                    <img class="col-4" style="max-height: 100%" <?php if (isset($auto['afbeelding'])):?>src="<?php echo $auto['afbeelding']?>"<?php endif;?> src="#" id="output" alt=""/>
                     <div class="col-4">
                         <h2 class="text-white"><?php echo $auto['naam'];?></h2>
                         <p class="text-white text-start"><?php echo $auto['beschrijving'];?></p>

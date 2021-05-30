@@ -180,3 +180,9 @@ if (isset($_POST['finishOrder']) && !empty($_POST['finishOrder'])){
     $utilities->redirect('../Profiel.php');
 }
 
+//een auto zoeken
+if (isset($_POST['search']) && !empty($_POST['search'])){
+    $search = $_POST['search'];
+    unset($_POST['search']);
+    var_dump($search);die;
+}
