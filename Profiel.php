@@ -83,7 +83,7 @@ if (isset($bestellingen) && !empty($bestellingen)){
 
                                 <div class="row mt-1">
                                     <div class="col-md-10 mx-auto">
-                                        <button type="button" class="btn btn-primary rounded-pill" onclick="editprofile()">Edit profile</button>
+                                        <button type="button" class="btn btn-primary rounded-pill" onclick="editprofile()">Bewerk profiel</button>
                                         <?php if ($rol == 'Medewerker' || $gebruiker['rol'] == 1): ?>
                                         <a href="medewerkers.php" type="button" class="btn btn-primary rounded-pill">Medewerker pagina</a>
                                         <?php endif; ?>

@@ -180,9 +180,16 @@ if (isset($_POST['finishOrder']) && !empty($_POST['finishOrder'])){
     $utilities->redirect('../Profiel.php');
 }
 
-//een auto zoeken
+//een auto zoeken todo: Finish this
 if (isset($_POST['search']) && !empty($_POST['search'])){
     $search = $_POST['search'];
     unset($_POST['search']);
     var_dump($search);die;
+}
+
+//medewerker verwijderen
+if (isset($_POST['deleteEmployee']) && !empty($_POST['deleteEmployee'])){
+    $empoyeeID = (int)$_POST['deleteEmployee'];
+    unset($_POST['deleteEmployee']);
+
 }
