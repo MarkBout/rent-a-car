@@ -1,15 +1,23 @@
 <?php
 include 'navbar.php';
 include 'modals/deleteEmployee.php';
+include 'modals/createEmployee.php';
 if (!isset($_SESSION['gebruiker']) || $_SESSION['gebruiker']['rol'] != 1){
     $utilities->redirect('index.php');
 }
 $carlist = $database->getObject($connection,'auto',array('*'));
 $rentedCars = $database->getObject($connection, 'auto',array('*'),'status="rented"');
+
 //costum query used to prevent the collection of deleted employees, stuff like the name needs to remain so that orders don't break
 // but deleted employees (and users) won't have either a username or a password
-$employeeQuery = 'SELECT idgebruikers,voornaam,tussenvoegsel,achternaam,gebruikersnaam FROM gebruiker WHERE gebruikersnaam IS NOT NULL AND rol = 1;';
-$employees = $database->getObject($connection,null,array(null),null,$employeeQuery);
+$employeeQuery = 'SELECT idgebruikers,voornaam,tussenvoegsel,achternaam,gebruikersnaam FROM gebruiker WHERE gebruikersnaam IS not null AND rol = 1;';
+$employeeArray = $database->getObject($connection,null,array(null),null,$employeeQuery);
+$employees = [];
+foreach ($employeeArray as $employee){
+    if (!$employee['gebruikersnaam'] == ''){
+        $employees[] = $employee;
+    }
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -22,15 +30,15 @@ $employees = $database->getObject($connection,null,array(null),null,$employeeQue
 
         <nav>
             <div class="nav nav-tabs mt-1" id="nav-tab" role="tablist" style="display: flex; justify-content: center; align-items: center;">
-                <button class="nav-link btn-primary" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#beheer" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Beheer</button>
+                <button class="nav-link active btn-primary" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#beheer" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Beheer</button>
                 <button class="nav-link btn-primary" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#verhuurd" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Verhuurd</button>
-                <?php //if ($_SESSION['gebruiker']['gebruikersnaam'] === 'directie@rent-a-car.nl'): ?>
-                <button class="nav-link active btn-primary" id="nav-directie-tab" data-bs-toggle="tab" data-bs-target="#directie" type="button" role="tab" aria-controls="nav-directie" aria-selected="false">Directie</button>
-                <?php //endif;?>
+                <?php if ($_SESSION['gebruiker']['gebruikersnaam'] === 'directie@rent-a-car.nl'): ?>
+                <button class="nav-link btn-primary" id="nav-directie-tab" data-bs-toggle="tab" data-bs-target="#directie" type="button" role="tab" aria-controls="nav-directie" aria-selected="false">Directie</button>
+                <?php endif;?>
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade " id="beheer" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="tab-pane fade show active" id="beheer" role="tabpanel" aria-labelledby="nav-home-tab">
                 <BUTTON class="btn btn-primary mt-1 mb-1" style="display: flex;left: 10%"><a style="color: white; text-decoration: none" href="autoBeheer.php">Auto toevoegen</a></BUTTON>
                 <table class="table text-center text-white" id="management">
                     <thead>
@@ -95,8 +103,8 @@ $employees = $database->getObject($connection,null,array(null),null,$employeeQue
                 </table>
             </div>
 
-            <div class="tab-pane fade show active" id="directie" role="tabpanel" aria-labelledby="nav-directie-tab">
-                <button class="btn btn-primary mt-1 mb-1">Medewerkers toevoegen</button>
+            <div class="tab-pane fade" id="directie" role="tabpanel" aria-labelledby="nav-directie-tab">
+                <button class="btn btn-primary mt-1 mb-1" data-bs-toggle="modal" data-bs-target="#createEmployeeModal">Medewerkers toevoegen</button>
                 <div class="container">
                     <table class="table table-image text-white" id="employees" border="1">
                         <thead>
@@ -108,6 +116,7 @@ $employees = $database->getObject($connection,null,array(null),null,$employeeQue
                         </thead>
                         <tbody>
                         <?php foreach ($employees as $employee):?>
+
                             <tr>
                                 <td><?php echo $employee['voornaam'].' '.$employee['tussenvoegsel'].' '.$employee['achternaam']?></td>
                                 <td><?php echo $employee['gebruikersnaam']?></td>
@@ -158,6 +167,7 @@ $employees = $database->getObject($connection,null,array(null),null,$employeeQue
             link.click();
             document.body.removeChild(link);
         }
+
         $(document).on("click", "#delemployee", function () {
             var myBookId = $(this).data('id');
             $(".modal-footer #employeeId").val( myBookId );

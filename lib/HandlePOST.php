@@ -187,9 +187,28 @@ if (isset($_POST['search']) && !empty($_POST['search'])){
     var_dump($search);die;
 }
 
+//medewerker aanmaken
+if (isset($_POST['medewerker']) && !empty($_POST['medewerker'])){
+    $medewerker = $_POST['medewerker'];
+    unset($_POST['medewerker']);
+    if (empty($medewerker['tussenvoegsel']) || $medewerker['tussenvoegsel'] == '') unset($medewerker['tussenvoegsel']);
+    $medewerker['gebruikersnaam'] = $medewerker['voornaam'].'@rent-a-car.nl';
+    $medewerker['wachtwoord'] = password_hash($medewerker['wachtwoord'], PASSWORD_DEFAULT);
+    $medewerker['rol'] = 1;
+    $database->makeObject($connection,$medewerker,'gebruiker');
+    $utilities->redirect($_SERVER['HTTP_REFERER']);
+}
+
 //medewerker verwijderen
 if (isset($_POST['deleteEmployee']) && !empty($_POST['deleteEmployee'])){
     $empoyeeID = (int)$_POST['deleteEmployee'];
-    unset($_POST['deleteEmployee']);
-
+    $deletequery = 'UPDATE gebruiker SET gebruikersnaam = null, wachtwoord = null WHERE idgebruikers = '.$empoyeeID.';';
+    if ($stmt = $connection->prepare($deletequery)){
+        $stmt->execute();
+        if ($stmt->affected_rows > 0) {
+            $utilities->redirect($_SERVER['HTTP_REFERER']);
+        }
+    }else{
+        exit($connection->error);
+    }
 }
