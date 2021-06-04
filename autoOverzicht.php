@@ -1,7 +1,7 @@
 <?php include 'navbar.php';
 include_once 'lib/Utilities.php';
 $carlist = $database->getObject($connection,'auto',array('*'), "status='available'");
-if (isset($_SESSION['searchresult'])) $carlist = $_SESSION['searchresult'];
+if (isset($_SESSION['searchresult']) && !empty($_SESSION['searchresult'])) $carlist = $_SESSION['searchresult'];
 $types = $database->getObject($connection,'prijs',array('type'));
 $merken = $database->getObject($connection,'prijs',array('merk'));
 
@@ -15,6 +15,7 @@ $merken = $database->getObject($connection,'prijs',array('merk'));
     <div class="container-fluid">
         <div class="container position-absolute primary-colour" style="top: 15%; left: 10%; right: 10%; opacity: 0.9">
             <h1 class="text-center mt-3 text-white">Auto Overzicht</h1>
+
             <? //zoekfilter ?>
             <form action="lib/HandlePOST.php" method="post">
                 <div class="row">
@@ -38,7 +39,7 @@ $merken = $database->getObject($connection,'prijs',array('merk'));
                     </div>
                     <div class="col-3">
                         <label for="naam" class="form-label text-white">Naam</label>
-                        <input type="text" id="naam" name="search[naam]" class="form-control" required placeholder="zoek op naam">
+                        <input type="text" id="naam" name="search[naam]" class="form-control" placeholder="zoek op naam">
                     </div>
                     <div class="col-3">
                         &nbsp;
@@ -53,6 +54,11 @@ $merken = $database->getObject($connection,'prijs',array('merk'));
 
              <div class="col-12" style="max-width: 100%">
                  <?php foreach ($carlist as $car):
+                     if ($car['status'] === 'rented'){
+                         unset($car);
+                         if (empty($car)){ echo '<h1 class="text-center">Geen auto\'s gevonden</h1>';break;}
+
+                     } ;
                      $temp = $database->getObject($connection,'prijs',array('*'),'idprijs='.(int)$car['idprijs'])[0];
                      $car['type'] = $temp['type'];
                      $car['dagprijs'] = $temp['dagprijs'];

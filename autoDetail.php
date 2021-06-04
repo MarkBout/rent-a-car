@@ -58,6 +58,7 @@ if ($stmt = $connection->prepare('SELECT idauto FROM auto WHERE idauto = ?')){
                                     </div>
                                     <div class="card-footer text-center">
                                         <button type="submit" id="huren" value="" class="btn btn-primary text-white rounded-pill" disabled>in winkelmand</button>
+                                        <?php if ($auto['status'] === 'rented') echo '<br>U kunt geen verhuurde auto\'s huren'; ?>
                                     </div>
                                 </form>
                                 <?php else: ?>

@@ -46,7 +46,7 @@ $afbeeldingen = $database->getObject($connection,'auto',array('afbeelding'));
     function hideMessage() {
         document.getElementById("registermessage").style.display = "none";
     };
-    setTimeout(hideMessage, 1000);
+    setTimeout(hideMessage, 3000);
 </script>
 </body>
 </html>

@@ -54,7 +54,6 @@ class GebruikDB {
             $query = "SELECT $fields FROM $table";
         }
         if (isset($costumQuery)) $query = $costumQuery;
-
         $result = $connection->query($query);
         if (mysqli_num_rows($result) == 0) {
             return $connection->error;

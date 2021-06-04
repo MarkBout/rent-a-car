@@ -180,11 +180,34 @@ if (isset($_POST['finishOrder']) && !empty($_POST['finishOrder'])){
     $utilities->redirect('../Profiel.php');
 }
 
-//een auto zoeken todo: Finish this
+//een auto zoeken
 if (isset($_POST['search']) && !empty($_POST['search'])){
     $search = $_POST['search'];
     unset($_POST['search']);
-    var_dump($search);die;
+    if (isset($search['reset'])){
+        unset($_SESSION['searchresult']);
+        $utilities->redirect($_SERVER['HTTP_REFERER']);
+    }
+    switch ($search){
+        case isset($search['merk']) && isset($search['type']):
+            $parameters = 'merk = "'.$search['merk'].'" and type  = "'.$search['type'].'"';
+            break;
+        case isset($search['merk']):
+            $parameters = 'merk = "'.$search['merk'].'"';
+            break;
+        case isset($search['type']):
+            $parameters = 'type  = "'.$search['type'].'"';
+    }
+    $prijzen = $database->getObject($connection,'prijs',array('idprijs'),$parameters);
+
+    $autolist = [];
+
+        foreach ($prijzen as $prijsId) {
+            $auto = $database->getObject($connection, 'auto', array('*'), 'idprijs = ' . (int)$prijsId['idprijs']);
+            $autolist = $auto;
+        }
+    $_SESSION['searchresult'] = $autolist;
+    $utilities->redirect($_SERVER['HTTP_REFERER']);
 }
 
 //medewerker aanmaken
