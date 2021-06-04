@@ -207,6 +207,7 @@ if (isset($_POST['search']) && !empty($_POST['search'])){
             break;
         case isset($search['type']):
             $parameters = 'type  = "'.$search['type'].'"';
+            break;
     }
     $prijzen = $database->getObject($connection,'prijs',array('idprijs'),$parameters);
 

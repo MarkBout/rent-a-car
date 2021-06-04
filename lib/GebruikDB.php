@@ -55,8 +55,9 @@ class GebruikDB {
         }
         if (isset($costumQuery)) $query = $costumQuery;
         $result = $connection->query($query);
+        //var_dump($query);
         if (mysqli_num_rows($result) == 0) {
-            return $connection->error;
+            return var_dump($connection->error);
         } else {
             $index = 0;
             while ($row = mysqli_fetch_assoc($result)) {
