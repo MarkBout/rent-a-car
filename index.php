@@ -29,6 +29,7 @@ $afbeeldingen = $database->getObject($connection,'auto',array('afbeelding'));
             <?php
             if (isset($_SESSION['message'])){
                 echo '<div id="registermessage" class="'.$_SESSION['message']['class'].'" role="alert"><button type="button" class="btn-close text-end" data-bs-dismiss="alert" aria-label="Close"></button>'.$_SESSION['message']['content'].'</div>';
+                unset($_SESSION['message']);
             }
 
             ?>

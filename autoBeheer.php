@@ -46,7 +46,7 @@ $prijzen = $database->getObject($connection,'prijs',array('*'));
                             foreach ($statusEnums as $key => $value){
                                 if (isset($auto['status']) && $auto['status'] == $key){
                                     unset($key);
-                                    echo '<option value="'.$auto['status'].'">'.$value.'</option>';
+                                    echo '<option selected value="'.$auto['status'].'">'.$value.'</option>';
                                     continue;
                                 }
                                 echo '<option value="'.$key.'">'.$value.'</option>';
