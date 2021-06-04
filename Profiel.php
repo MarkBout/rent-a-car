@@ -65,7 +65,7 @@ if (isset($bestellingen) && !empty($bestellingen)){
                                         <div class="col-md-3">
                                             <label for="newpass" class="text-white">Nieuw wachtwoord</label>
                                         </div>
-                                        <div class="col-md-6 mb-1">
+                                        <div class="col-6 mb-1">
                                             <input id="newpass" type="password" class="form-control" name="profile[newpass]">
                                         </div>
                                     </div>
@@ -83,7 +83,7 @@ if (isset($bestellingen) && !empty($bestellingen)){
 
                                 <div class="row mt-1">
                                     <div class="col-md-10 mx-auto">
-                                        <button type="button" class="btn btn-primary rounded-pill" onclick="editprofile()">Bewerk profiel</button>
+                                        <button type="button" class="btn btn-primary rounded-pill" onclick="editProfile()">Bewerk profiel</button>
                                         <?php if ($rol == 'Medewerker' || $gebruiker['rol'] == 1): ?>
                                         <a href="medewerkers.php" type="button" class="btn btn-primary rounded-pill">Medewerker pagina</a>
                                         <?php endif; ?>
@@ -133,8 +133,8 @@ if (isset($bestellingen) && !empty($bestellingen)){
 </div>
 </div>
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js">
-    function editprofile() {
+<script>
+    function editProfile() {
         var inputs = document.getElementsByClassName('form-control');
         //enable inputs
         for (var i = 0; i < inputs.length; i++) {

@@ -6,14 +6,13 @@ include 'modals/createEmployee.php';
 if (!isset($_SESSION['gebruiker']) || $_SESSION['gebruiker']['rol'] != 1){
     $utilities->redirect('index.php');
 }
-$carlist = $database->getObject($connection,'auto',array('*'));
+$carlist = $database->getObject($connection,'auto',array('*'),"status NOT LIKE 'deleted'");
 $autoIds = $database->getObject($connection,'bestelling',array('idauto'));
 $rentedCars = [];
 foreach ($autoIds as $id){
     $auto = $database->getObject($connection,'auto',array('*'),'idauto = '.$id['idauto'])[0];
     array_push($rentedCars,$auto);
 }
-
 //costum query used to prevent the collection of deleted employees, stuff like the name needs to remain so that orders don't break
 // but deleted employees (and users) won't have either a username or a password
 $employeeQuery = 'SELECT idgebruikers,voornaam,tussenvoegsel,achternaam,gebruikersnaam FROM gebruiker WHERE gebruikersnaam IS not null AND rol = 1;';
@@ -60,7 +59,6 @@ foreach ($employeeArray as $employee){
                     </thead>
                     <tbody>
                     <?php foreach ($carlist as $car):
-                        if ($car['status'] === 'deleted') unset($car);
                         $temp = $database->getObject($connection,'prijs',array('type','dagprijs'),'idprijs='.(int)$car['idprijs'])[0];
                         $car['dagprijs'] = $temp['dagprijs'];
                         ?>
@@ -76,7 +74,7 @@ foreach ($employeeArray as $employee){
                                     <a class="text-white" style="text-decoration: none !important" href="autoBeheer.php?id=<?php echo $car['idauto']?>">Bewerken</a>
                                 </button>
                                 <a class="mt-1 btn btn-primary rounded-pill" href="autoDetail.php?id=<?php echo $car['idauto']?>">Bekijken</a>
-                                <button class="mt-1 btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#deletecarModal" id="deletecar" value="<?php echo $car['idauto']?>" <?php if ($car['status'] == 'rented'):?> disabled<?php endif;?>>Verwijderen</button>
+                                <button class="mt-1 btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#deletecarModal" id="deletecar" data-id="<?php echo $car['idauto']?>" <?php if ($car['status'] == 'rented'):?> disabled<?php endif;?>>Verwijderen</button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -177,13 +175,13 @@ foreach ($employeeArray as $employee){
         }
         $(document).on("click", "#deletecar", function () {
             var myBookId = $(this).data('id');
-            $(".modal-footer #employeeId").val( myBookId );
+            $(".modal-footer #carId").val( myBookId );
 
         });
 
         $(document).on("click", "#delemployee", function () {
             var myBookId = $(this).data('id');
-            $(".modal-footer #carId").val( myBookId );
+            $(".modal-footer #employeeId").val( myBookId );
 
         });
     </script>

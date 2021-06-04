@@ -123,6 +123,16 @@ if (isset($_POST['auto']) && !empty($_POST['auto'])) {
     $utilities->redirect('../medewerkers.php');
 }
 
+//auto verwijderen
+if (isset($_POST['deletecar']) && !empty($_POST['deletecar'])){
+    $carId = (int)$_POST['deletecar'];
+    unset($_POST['deletecar']);
+    $car = $database->getObject($connection, 'auto',array('*'),'idauto = '.$carId)[0];
+    $car['status'] = 'deleted';
+    $database->updateObject($connection,$car,'auto','idauto');
+    $utilities->redirect('../medewerkers.php');
+}
+
 //prijs toevoegen
 if (isset($_POST['newprice']) && !empty($_POST['newprice'])){
     $newprice = $_POST['newprice'];
