@@ -6,6 +6,7 @@ if (!isset($_SESSION['gebruiker']) || $_SESSION['gebruiker']['rol'] != 1){
     $utilities->redirect('index.php');
 }
 $carlist = $database->getObject($connection,'auto',array('*'));
+$autoIds = $database->getObject($connection,'bestelling',array('idauto'));
 $rentedCars = $database->getObject($connection, 'auto',array('*'),'status="rented"');
 
 //costum query used to prevent the collection of deleted employees, stuff like the name needs to remain so that orders don't break
