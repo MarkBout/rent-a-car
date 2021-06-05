@@ -42,11 +42,13 @@ $connection = $database->setConn('localhost', 'root',null,'rent-a-car');
 </head>
 <header>
 
-    <nav class="navbar primary-colour">
+    <nav class="navbar primary-colour" style="z-index: 1">
         <div class="container-fluid">
             <div class="d-flex align-items-center">
                 <div>
-                    <img class="img-fluid" src="images/logo.png" alt="Card image cap">
+                    <a href="index.php">
+                        <img class="img-fluid" src="images/logo.png" alt="Card image cap">
+                    </a>
                 </div>
                 <h2 class="text-white col p-2 m-0">Rent a Car | Autoverhuur</h2>
             </div>
