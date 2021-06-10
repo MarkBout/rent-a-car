@@ -156,7 +156,7 @@ if (isset($_POST['bestelling']) && !empty($_POST['bestelling'])){
         $_SESSION['cart'] = array();
     }
     array_push($_SESSION['cart'],$bestelling);
-    $utilities->redirect('../winkelwagen');
+    $utilities->redirect('../winkelwagen.php');
 }
 
 //remove order from cart
@@ -213,10 +213,10 @@ if (isset($_POST['search']) && !empty($_POST['search'])){
 
     $autolist = [];
 
-        foreach ($prijzen as $prijsId) {
-            $auto = $database->getObject($connection, 'auto', array('*'), 'idprijs = ' . (int)$prijsId['idprijs']);
-            $autolist = $auto;
-        }
+    foreach ($prijzen as $prijsId) {
+        $auto = $database->getObject($connection, 'auto', array('*'), 'idprijs = ' . (int)$prijsId['idprijs']);
+        $autolist = $auto;
+    }
     $_SESSION['searchresult'] = $autolist;
     $utilities->redirect($_SERVER['HTTP_REFERER']);
 }
