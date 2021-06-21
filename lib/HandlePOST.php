@@ -114,7 +114,7 @@ if (isset($_POST['auto']) && !empty($_POST['auto'])) {
         unset($car['afbeelding'], $afbeelding);
     }
     $car['beschrijving'] = $connection->escape_string($car['beschrijving']);
-    //update or make car
+    //update or make auto
     if (isset($car['idauto'])){
         $database->updateObject($connection,$car,'auto','idauto');
     }else{
